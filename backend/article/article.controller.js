@@ -1,13 +1,14 @@
-
 const express = require('express');
 const router = express.Router();
+const articleService = require('./article.service');
 
 
 
-router.post('/create/:id', (req, res)=>{ 
+router.get('/create', (req, res)=>{ 
 
-    res.send('Birds home page');
-    req
+    const name = req.body.name
+
+    res.send(name);
   });
 
 
