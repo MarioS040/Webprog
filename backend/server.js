@@ -3,7 +3,7 @@ const port = process.env.PORT || 8080;
 const app = express();
 const bycrpyt = require('bcrypt');
 app.use(express.json() );
-
+const db_con = require('./db_connection');
 
 const users = [];
 
@@ -29,6 +29,8 @@ app.post('/users', async (req, res) => {
  const salt = await bycrpyt.genSalt()
  const hashedPassword = await bycrpyt.hash(req.body.password, 10)
  const user = {name: req.body.name, password: hashedPassword}
+ const name = req.body.name;
+ db_con.connection.query("INSERT INTO `user` ( `username`, `password`) VALUES ("user.name", 'adasasdasdaddad')")
  users.push(user)
  res.status(201).send()
 
@@ -65,5 +67,8 @@ catch{
 
 
 })
+
+
+
 
 app.listen(port);
