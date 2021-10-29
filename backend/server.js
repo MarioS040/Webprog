@@ -9,8 +9,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-// api routes
+// api für Users
 app.use('/users', require('./users/users.controller'));
+
+//api für Artikel
+app.use('/article', require('./article/article.controller'));
 
 // global error handler
 app.use(errorHandler);
