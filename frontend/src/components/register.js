@@ -1,12 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/register.css'
 import { Link } from 'react-router-dom';
 import NavBar from './navbar';
 
 
-export default function register(){
 
+
+class register extends Component{
+constructor(props){
+super(props)
+  this.state ={
+    firstName: '',
+    lastName:'',
+    username:'',
+    password:''
+  }
+}
+
+changeHandler = (e) =>{
+this.setState({[e.target.name]:e.target.value})
+
+}
+
+submitHandler = (e) =>{
+e.preventDefault()
+console.log(this.state)
+
+fetch('http://localhost:8080/users/register', {
+method: 'POST',
+headers: {"content-type": "application/json"},
+body: JSON.stringify(this.state)
+
+})
+
+}
+
+
+render(){
+  const {firstName, lastName, username, password} = this.state;
 return(
 
 
@@ -21,19 +53,27 @@ return(
 
     <h3>Registerieren</h3>
     <hr />
-    <form>
+    <form onSubmit={this.submitHandler}>
       <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"></input>
+        <label for="Vorname">Vorname</label>
+        <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Vorname" value={firstName} onChange={this.changeHandler}></input>
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></input>
+        <label for="Nachname">Nachname</label>
+        <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Nachname" value={lastName} onChange={this.changeHandler}></input>
       </div>
-      <button type="submit" class="btn btn-primary">Login</button>
+      <div class="form-group">
+        <label for="Benutzername">Benutzername</label>
+        <input type="text" name="username" class="form-control" id="username" placeholder="Benutzername" value={username} onChange={this.changeHandler}></input>
+      </div>
+      <div class="form-group">
+        <label for="Passwort">Passwort</label>
+        <input type="password" name="password" class="form-control" id="password" placeholder="Password" value={password} onChange={this.changeHandler}></input>
+      </div>
+      <button type="submit" class="btn btn-primary">Registrieren</button>
       <hr />
-      <button type="button" class="btn btn-link">Signup</button>
-      <button type="button" class="btn btn-link">Reset Password</button>
+      <button type="button" class="btn btn-link">Login</button>
+      
 
     </form>
 
@@ -47,4 +87,6 @@ return(
 )
 
 
-}
+}}
+
+export default register;

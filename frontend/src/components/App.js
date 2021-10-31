@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 
+
 function App() {
   return (
 
@@ -15,6 +16,7 @@ function App() {
 <Switch>
 <Route path="/register" component={register} />
 <Route path="/login" component={login} />
+
 </Switch>
 </Router>
 

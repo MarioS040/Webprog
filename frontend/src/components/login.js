@@ -1,10 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './css/login.css'
+import './css/register.css'
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
-export default function login(){
 
+
+class login extends Component{
+constructor(props){
+super(props)
+  this.state ={
+    username:'',
+    password:''
+  }
+}
+
+changeHandler = (e) =>{
+this.setState({[e.target.name]:e.target.value})
+
+}
+
+submitHandler = (e) =>{
+e.preventDefault()
+console.log(this.state)
+
+fetch('http://localhost:8080/users/authenticate', {
+method: 'POST',
+headers: {"content-type": "application/json"},
+body: JSON.stringify(this.state)
+
+})
+
+}
+
+
+render(){
+  const {username, password} = this.state;
 return(
 
 
@@ -19,19 +50,19 @@ return(
 
     <h3>Login</h3>
     <hr />
-    <form>
+    <form onSubmit={this.submitHandler}>
       <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"></input>
+        <label for="Benutzername">Benutzername</label>
+        <input type="text" name="username" class="form-control" id="username" placeholder="Benutzername" value={username} onChange={this.changeHandler}></input>
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></input>
+        <label for="Passwort">Passwort</label>
+        <input type="password" name="password" class="form-control" id="password" placeholder="Password" value={password} onChange={this.changeHandler}></input>
       </div>
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button type="submit" class="btn btn-primary">login</button>
       <hr />
-      <button type="button" class="btn btn-link">Signup</button>
-      <button type="button" class="btn btn-link">Reset Password</button>
+      <button type="button" class="btn btn-link">Registrieren</button>
+      
 
     </form>
 
@@ -45,4 +76,6 @@ return(
 )
 
 
-}
+}}
+
+export default login;
