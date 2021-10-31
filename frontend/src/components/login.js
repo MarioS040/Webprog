@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/register.css'
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
+import { Header } from './navbar';
 
 
 
@@ -46,7 +46,7 @@ return(
 
 
   <div class="content">
-
+ 
 
     <h3>Login</h3>
     <hr />

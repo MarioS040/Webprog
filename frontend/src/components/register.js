@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/register.css'
-import { Link } from 'react-router-dom';
-import NavBar from './navbar';
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -33,12 +32,13 @@ headers: {"content-type": "application/json"},
 body: JSON.stringify(this.state)
 
 })
-
+this.props.history.push('/login')
 }
 
 
 render(){
   const {firstName, lastName, username, password} = this.state;
+
 return(
 
 
