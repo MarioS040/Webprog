@@ -5,7 +5,7 @@ import login from './login';
 
 
 import React, { Component } from 'react';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 
 
 
@@ -16,8 +16,6 @@ function App() {
 
 
 <Router>
-
-
 <Switch>
 
 <Route path="/register" component={register} />

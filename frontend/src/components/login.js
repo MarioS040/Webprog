@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, useState, SyntheticEvent } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/register.css'
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Header } from './navbar';
+import Cookies from 'universal-cookie';
+import localStorage from 'local-storage';
 
 
 
@@ -20,17 +22,20 @@ this.setState({[e.target.name]:e.target.value})
 
 }
 
+
+
 submitHandler = (e) =>{
 e.preventDefault()
-console.log(this.state)
+
 
 fetch('http://localhost:8080/users/authenticate', {
 method: 'POST',
+credentials: 'same-origin',
 headers: {"content-type": "application/json"},
 body: JSON.stringify(this.state)
-
 })
-
+.then(response => response.json())
+.then((response) => {window.localStorage.setItem("token", response.token)})
 }
 
 
