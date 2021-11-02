@@ -1,17 +1,29 @@
 import react from 'react';
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import register from './register'
-import login from './login'
+import login from './login';
+
+
+import React, { Component } from 'react';
+
+
+
 
 function App() {
   return (
+
+    <div>
+
+
 <Router>
-<switch>
+<Switch>
+
 <Route path="/register" component={register} />
 <Route path="/login" component={login} />
-</switch>
-</Router>
 
+</Switch>
+</Router>
+</div>
   );
 }
 
