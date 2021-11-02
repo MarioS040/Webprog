@@ -7,6 +7,7 @@ import localStorage, { set } from 'local-storage';
 import Navigation from './navbar';
 
 const cookies = new Cookies();
+let loginfailed;
 
 class login extends Component{
 constructor(props){
@@ -16,6 +17,8 @@ super(props)
     password:''
   }
 }
+
+
 
 
 changeHandler = (e) =>{
@@ -38,10 +41,12 @@ headers: {"content-type": "application/json"},
 body: JSON.stringify(this.state)
 }
 )
-
-.then(response => response.json())
+.then((response) => response.json().then(loginfailed = response.status))
 .then(response => (cookies.set("token", response.token)))
+.then(response =>{ console.log(response)})
 .then(response => (window.localStorage.setItem("isAuthenticated", "true")))
+//.then(console.log(loginfailed))
+
 }
 
 
@@ -49,9 +54,32 @@ body: JSON.stringify(this.state)
 
 
 
+ loginfailure = () => {
+  
+
+  if(loginfailed == "500"){
+
+
+    console.log("login fehlgeschlagen")
+  }else{
+
+    console.log("erfolgreich eingeloggt")
+  }
+
+
+
+
+        
+    
+      }
+  
+
+
 
 render(){
   const {username, password} = this.state;
+
+
 return(
 
 
@@ -75,9 +103,10 @@ return(
         <label for="Passwort">Passwort</label>
         <input type="password" name="password" class="form-control" id="password" placeholder="Password" value={password} onChange={this.changeHandler}></input>
       </div>
-      <button type="submit" class="btn btn-primary">login</button>
+      <button type="submit" onClick={this.loginfailure} class="btn btn-primary">login</button>
       <hr />
       <button type="button" class="btn btn-link">Registrieren</button>
+      
       
 
     </form>
