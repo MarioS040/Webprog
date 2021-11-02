@@ -4,10 +4,10 @@ import './css/register.css'
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Header } from './navbar';
 import Cookies from 'universal-cookie';
-import localStorage from 'local-storage';
+import localStorage, { set } from 'local-storage';
 import Navigation from './navbar';
 
-
+const cookies = new Cookies();
 
 class login extends Component{
 constructor(props){
@@ -17,6 +17,7 @@ super(props)
     password:''
   }
 }
+
 
 changeHandler = (e) =>{
 this.setState({[e.target.name]:e.target.value})
@@ -36,7 +37,8 @@ headers: {"content-type": "application/json"},
 body: JSON.stringify(this.state)
 })
 .then(response => response.json())
-.then((response) => {window.localStorage.setItem("token", response.token)})
+.then((response) => {cookies.set("token", response.token,{httpOnly: 'true'})}) 
+.then((response) => {window.localStorage.setItem("isAuthenticated", true)})
 }
 
 
