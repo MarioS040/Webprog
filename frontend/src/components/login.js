@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Header } from './navbar';
 import Cookies from 'universal-cookie';
 import localStorage from 'local-storage';
+import Navigation from './navbar';
 
 
 
@@ -46,7 +47,7 @@ return(
 
 <div class="back">
 
-
+<Navigation />
 <div class="div-center">
 
 

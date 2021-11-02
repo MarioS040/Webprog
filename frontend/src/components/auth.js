@@ -1,26 +1,7 @@
 class Auth{
 
-constructor(){
-this.authenticated = false;
+const dertoken = localStorage.getItem(this.token)
 
-}
-
-login(cb){
-this.authenticated = true;
-cb()
-}
-
-logout(cb){
-
-    this.authenticated = false;
-    cb();
-}
-
-
-isAtuhenticated(){
-
-    return this.authenticated;
-}
 
 }
 
