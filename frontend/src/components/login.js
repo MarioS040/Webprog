@@ -2,7 +2,6 @@ import React, { Component, SyntheticEvent } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/register.css'
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Header } from './navbar';
 import Cookies from 'universal-cookie';
 import localStorage, { set } from 'local-storage';
 import Navigation from './navbar';
@@ -24,15 +23,7 @@ this.setState({[e.target.name]:e.target.value})
 
 }
 
-failedlogin = () =>{
 
-  return(
-<div>
-  Anmeldung nicht erfolgreich
-</div>
-
-  )
-}
 
 
 
@@ -50,7 +41,8 @@ body: JSON.stringify(this.state)
 
 .then(response => response.json())
 .then(response => (cookies.set("token", response.token)))
-.then(response => (window.localStorage.setItem("isAuthenticated", true)))}
+.then(response => (window.localStorage.setItem("isAuthenticated", "true")))
+}
 
 
 
