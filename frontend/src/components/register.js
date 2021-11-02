@@ -26,7 +26,7 @@ submitHandler = (e) =>{
 e.preventDefault()
 
 
-fetch('http://localhost:8080/users/register', {
+fetch('http://localhost:3000/users/register', {
 method: 'POST',
 headers: {"content-type": "application/json"},
 body: JSON.stringify(this.state)

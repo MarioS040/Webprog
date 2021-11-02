@@ -1,4 +1,4 @@
-import React, { Component, useState, SyntheticEvent } from 'react';
+import React, { Component, SyntheticEvent } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/register.css'
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -24,22 +24,38 @@ this.setState({[e.target.name]:e.target.value})
 
 }
 
+failedlogin = () =>{
+
+  return(
+<div>
+  Anmeldung nicht erfolgreich
+</div>
+
+  )
+}
+
 
 
 submitHandler = (e) =>{
 e.preventDefault()
 
 
-fetch('http://localhost:8080/users/authenticate', {
+fetch('http://localhost:3000/users/authenticate', {
 method: 'POST',
-credentials: 'same-origin',
+//credentials: 'same-origin',
 headers: {"content-type": "application/json"},
 body: JSON.stringify(this.state)
-})
-.then(response => response.json())
-.then((response) => {cookies.set("token", response.token,{httpOnly: 'true'})}) 
-.then((response) => {window.localStorage.setItem("isAuthenticated", true)})
 }
+)
+
+.then(response => response.json())
+.then(response => (cookies.set("token", response.token)))
+.then(response => (window.localStorage.setItem("isAuthenticated", true)))}
+
+
+
+
+
 
 
 render(){
