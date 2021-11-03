@@ -1,4 +1,4 @@
-import React, { Component, SyntheticEvent, Fragment } from 'react';
+import React, { Component, SyntheticEvent, Fragment, useState } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/register.css'
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -8,8 +8,10 @@ import Navigation from './navbar';
 
 const cookies = new Cookies();
 let loginfailed ;
-let userloggedin;
 let resptoken;
+
+
+
 
 class login extends Component{
 constructor(props){
@@ -30,19 +32,20 @@ this.setState({[e.target.name]:e.target.value})
 }
 
 
-submitHandler = async (e) =>{
+submitHandler = (e) =>{
 e.preventDefault()
 
 
 fetch('http://localhost:3000/users/authenticate', {
 method: 'POST',
-//credentials: 'same-origin'
 headers: {"content-type": "application/json"},
 body: JSON.stringify(this.state)
 }
+
 )
-.then((response) => response.json().then(loginfailed = response.status).then((response) => resptoken = response.token))
-.then(this.loginfailure)
+.then((response) => response.json().then(loginfailed = response.status).then((response) => resptoken = response.token).then(this.loginfailure()))
+
+
 
 }
 
@@ -58,18 +61,30 @@ if(loginfailed == "200"){
   
   window.localStorage.setItem("isAuthenticated", "true");
   cookies.set("token", resptoken , {secure: true});
-  userloggedin = true;
   this.props.history.push('/home');
-  }
-else{
-
-  userloggedin = false;
+  }else if(loginfailed == "400" || loginfailed == "500"){
   
+    
+
+
+this.errormessage();
+
   }
- }
+    
+    
 
-
+  }
  
+
+errormessage = () =>{
+  
+  
+ window.alert("Nutzername oder Passwort falsch")
+  
+  
+ 
+}
+
 
 
 
@@ -100,7 +115,9 @@ return(
       <div class="form-group">
         <label for="Passwort">Passwort</label>
         <input type="password" name="password" class="form-control" id="password" placeholder="Password" value={password} onChange={this.changeHandler}></input>
+      
       </div>
+
       <button type="submit" class="btn btn-primary">login</button>
       <hr />
       <button type="button" class="btn btn-link">Registrieren</button>
