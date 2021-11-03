@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Navigation from './navbar';
 
 
 
@@ -10,6 +10,7 @@ return(
 
 
     <div>
+       
         hallo welt
     </div>
 )

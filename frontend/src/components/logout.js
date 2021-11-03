@@ -25,7 +25,7 @@ return(
 
 <div class="back">
 
-<Navigation />
+
 {userlogout}
 <div class="div-center">
 

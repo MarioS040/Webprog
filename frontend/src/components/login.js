@@ -61,7 +61,7 @@ if(loginfailed == "200"){
   
   window.localStorage.setItem("isAuthenticated", "true");
   cookies.set("token", resptoken , {secure: true});
-  this.props.history.push('/home');
+  window.location.href = "http://localhost:3000/home";
   }else if(loginfailed == "400" || loginfailed == "500"){
   
     
