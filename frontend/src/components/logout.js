@@ -1,12 +1,10 @@
-import React, { Component, SyntheticEvent } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/register.css'
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import localStorage, { clear } from 'local-storage';
-import Navigation from './navbar';
 
 
+
+const cookies = new Cookies();
 
 function logout (){
 
@@ -14,6 +12,7 @@ function logout (){
     function userlogout(){
 
         window.localStorage.removeItem("isAuthenticated");
+        cookies.remove('token');
         console.log("erfolg")
         }
 
@@ -26,7 +25,7 @@ return(
 <div class="back">
 
 
-{userlogout}
+{userlogout()}
 <div class="div-center">
 
 

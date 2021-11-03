@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Nav, Container} from 'react-bootstrap';
+import { Navbar, Nav, Container, Button} from 'react-bootstrap';
 
 
 export function Header (){
@@ -31,6 +31,16 @@ return(
   }
 }
 
+function logoutregistred (){
+  if (localStorage.getItem('isAuthenticated')){
+return(
+  <Nav>
+     <Button type="button" class="btn-sm"> <Nav.Link href="/logout">Logout</Nav.Link> </Button>
+  </Nav>
+)
+  }
+}
+
 
 return(
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -44,6 +54,7 @@ return(
         {isregistered()}
     </Nav>
     {notregistered()}
+    {logoutregistred()}
   </Navbar.Collapse>
   </Container>
 </Navbar>
