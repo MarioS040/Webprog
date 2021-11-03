@@ -1,7 +1,7 @@
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/register.css'
 import Cookies from 'universal-cookie';
-
+import Navigation from './navbar';
 
 
 const cookies = new Cookies();
@@ -23,7 +23,7 @@ return(
 
 
 <div class="back">
-
+<Navigation />
 
 {userlogout()}
 <div class="div-center">

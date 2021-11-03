@@ -1,18 +1,24 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
-function PrivateRoute({ component: Component, roles, ...rest }) {
-    return (
-        <Route {...rest} render={props => {
-            if (!localStorage.getItem('user')) {
-                // not logged in so redirect to login page with the return url
-                return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
-            }
+function userauth() {
 
-            // logged in so return component
-            return <Component {...props} />
-        }} />
-    );
+
+fetch('http://localhost:3000/users/current', {
+method: 'GET',
+withCredentials: true,
+headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJpYXQiOjE2MzU5NTU2MDUsImV4cCI6MTYzNjU2MDQwNX0.YCHyn4Q_41dhoNtaIB0cvnVlRRIJ0i_IC394uVsYR5k'
 }
 
-export { PrivateRoute };
+}
+
+).then((response) => response.json().then(response => console.log(response.firstName)))
+
+}
+
+
+export default userauth;

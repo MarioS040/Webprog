@@ -2,7 +2,6 @@ import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import register from './register';
 import login from './login';
 import home from './home';
-import Navigation from './navbar';
 import PrivateRoute from './protectedRoute';
 import logout from './logout';
 
@@ -13,7 +12,7 @@ function App() {
 
     <div>
       
-<Navigation/>
+
 
 <Router>
 <Switch>

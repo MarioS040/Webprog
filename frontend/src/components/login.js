@@ -24,8 +24,6 @@ super(props)
 
 
 
-
-
 changeHandler = (e) =>{
 this.setState({[e.target.name]:e.target.value})
 
@@ -43,8 +41,7 @@ body: JSON.stringify(this.state)
 }
 
 )
-.then((response) => response.json().then(loginfailed = response.status).then((response) => resptoken = response.token))
-.then(this.loginfailure())
+.then((response) => response.json().then(loginfailed = response.status).then((response) => resptoken = response.token)).then(this.loginfailure())
 
 
 
@@ -54,7 +51,7 @@ body: JSON.stringify(this.state)
 
 
 
-
+// async aufgrund von cookies.set, hier gab es fehler, da sonst "zu schnell" auf die homseite umgeleitet wurde und der token nicht gesetzt wurde
  loginfailure = async  () => {
   
   

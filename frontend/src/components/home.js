@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navigation from './navbar';
+import userauth from './auth';
 
 
 
@@ -10,7 +11,8 @@ return(
 
 
     <div>
-       
+        {userauth()}
+       <Navigation/>
         hallo welt
     </div>
 )
