@@ -8,6 +8,8 @@ import Navigation from './navbar';
 
 const cookies = new Cookies();
 let loginfailed ;
+let userloggedin;
+let resptoken;
 
 class login extends Component{
 constructor(props){
@@ -34,13 +36,12 @@ e.preventDefault()
 
 fetch('http://localhost:3000/users/authenticate', {
 method: 'POST',
-//credentials: 'same-origin',
+//credentials: 'same-origin'
 headers: {"content-type": "application/json"},
 body: JSON.stringify(this.state)
 }
 )
-.then((response) => response.json().then(loginfailed = response.status))
-.then(response => (cookies.set("token", response.token)))
+.then((response) => response.json().then(loginfailed = response.status).then((response) => resptoken = response.token))
 .then(this.loginfailure)
 
 }
@@ -53,16 +54,24 @@ body: JSON.stringify(this.state)
  loginfailure = () => {
   
   
-if(loginfailed == "500" || loginfailed == "400"){
+if(loginfailed == "200"){
   
-  
-    
+  window.localStorage.setItem("isAuthenticated", "true");
+  cookies.set("token", resptoken , {secure: true});
+  userloggedin = true;
+  this.props.history.push('/home');
   }
 else{
 
-  window.localStorage.setItem("isAuthenticated", "true")
+  userloggedin = false;
+  
   }
  }
+
+
+ 
+
+
 
 
 render(){
