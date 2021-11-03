@@ -7,13 +7,15 @@ import userauth from './auth';
 export default function home(){
 
 
+let dername = userauth();
+
 return(
 
 
     <div>
-        {userauth()}
+       
        <Navigation/>
-        hallo welt
+        hallo welt {dername}
     </div>
 )
 
