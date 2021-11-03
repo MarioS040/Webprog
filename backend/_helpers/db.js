@@ -7,17 +7,21 @@ module.exports = db = {};
 initialize();
 
 async function initialize() {
-    // create db if it doesn't already exist
+
+    // Datenbank anlegen, wenn diese noch nicht besteht
     const { host, port, user, password, database } = config.database;
     const connection = await mysql.createConnection({ host, port, user, password });
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
 
-    // connect to db
+    // Datenbankverbindung aufbauen mit in "config.json" gegebenen Credentials
     const sequelize = new Sequelize(database, user, password, { dialect: 'mysql' });
 
-    // init models and add them to the exported db object
+    // initialisieren der user und Artikel Datenbank
     db.User = require('../users/user.model')(sequelize);
-
+    db.article = require('../article/article.model')(sequelize);
+   
+   
+   
     // sync all models with database
     await sequelize.sync();
 }
