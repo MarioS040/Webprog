@@ -1,4 +1,4 @@
-import React, { Component, SyntheticEvent } from 'react';
+import React, { Component, SyntheticEvent, Fragment } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/register.css'
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -41,7 +41,6 @@ body: JSON.stringify(this.state)
 )
 .then((response) => response.json().then(loginfailed = response.status))
 .then(response => (cookies.set("token", response.token)))
-.then(response => (window.localStorage.setItem("isAuthenticated", "true")))
 .then(this.loginfailure)
 
 }
@@ -55,31 +54,15 @@ body: JSON.stringify(this.state)
   
   
 if(loginfailed == "500" || loginfailed == "400"){
-
-this.render()
-return(
-
-<div>
-  falsches Password
-</div>
-
-)
-    
+  
+  
     
   }
 else{
 
-    console.log("erfolgreich eingeloggt")
+  window.localStorage.setItem("isAuthenticated", "true")
   }
  }
-
-
-
-        
-    
-      
-  
-
 
 
 render(){
