@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Nav, Container, Button} from 'react-bootstrap';
+import { Navbar, Nav, Container, Button, Image} from 'react-bootstrap';
 
 
 export function Header (){
@@ -45,7 +45,7 @@ return(
 return(
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
   <Container>
-  <Navbar.Brand href="/">Yabe</Navbar.Brand>
+  <Navbar.Brand href="/"><Image src="image1.jpg" roundedCircle /></Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="me-auto">
