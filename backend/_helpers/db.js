@@ -18,7 +18,7 @@ async function initialize() {
 
     // initialisieren der user und Artikel Datenbank
     db.User = require('../users/user.model')(sequelize);
-    db.article = require('../article/article.model')(sequelize);
+    db.Article = require('../article/article.model')(sequelize);
    
    
    

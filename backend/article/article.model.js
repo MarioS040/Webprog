@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize');
 
-module.exports = modelarticle;
+module.exports = model;
 
-function modelarticle(sequelize) {
+function model(sequelize) {
     const attributes = {
         articleName: { type: DataTypes.STRING, allowNull: false },
         articleDescription: { type: DataTypes.STRING, allowNull: false },
@@ -11,5 +11,5 @@ function modelarticle(sequelize) {
 
     
 
-    return sequelize.define('article', attributes);
+    return sequelize.define('Article', attributes);
 }

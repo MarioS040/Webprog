@@ -1,10 +1,9 @@
-import React, { Component, SyntheticEvent, Fragment, useState } from 'react';
+import React, { Component} from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/register.css'
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import localStorage, { set } from 'local-storage';
 import Navigation from './navbar';
+import {Link } from 'react-router-dom';
 
 const cookies = new Cookies();
 let loginfailed ;
@@ -24,7 +23,7 @@ super(props)
 
 
 
-changeHandler = (e) =>{
+changeHandler = async (e) =>{
 this.setState({[e.target.name]:e.target.value})
 
 }
@@ -41,23 +40,21 @@ body: JSON.stringify(this.state)
 }
 
 )
-.then((response) => response.json().then(loginfailed = response.status).then((response) => resptoken = response.token)).then(this.loginfailure())
+.then((response) => response.json().then(loginfailed = response.status).then((response) => resptoken = response.token))
+.then(this.loginfailure())
 
 
 
 }
 
 
-
-
-
-// async aufgrund von cookies.set, hier gab es fehler, da sonst "zu schnell" auf die homseite umgeleitet wurde und der token nicht gesetzt wurde
- loginfailure = async  () => {
+ loginfailure = async () => {
   
   
 if(loginfailed == "200"){
+
+ await(cookies.set("token", resptoken , {secure: true}))
   window.localStorage.setItem("isAuthenticated", "true")
-  await(cookies.set("token", resptoken , {secure: true}))
   window.location.href = "http://localhost:3000/home"
   }else if(loginfailed == "400" || loginfailed == "500"){
   
@@ -117,7 +114,7 @@ return(
 
       <button type="submit" class="btn btn-primary">login</button>
       <hr />
-      <button type="button" class="btn btn-link">Registrieren</button>
+      <button type="button" class="btn btn-link"><Link to={'./register'}>Registrieren </Link></button>
       
       
 
