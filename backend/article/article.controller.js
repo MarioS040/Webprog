@@ -3,16 +3,34 @@ const router = express.Router();
 const articleService = require('./article.service');
 const authorize = require('_middleware/authorize');
 const db = require('_helpers/db');
+var multer = require('multer');
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+      cb(null, './upload');
+   },
+  filename: function (req, file, cb) {
+      cb(null , getRandomInt(999999999999) + file.originalname);
+  }
+});
 
 
 
-router.post('/create', authorize(), createarticle);
+router.post('/create', authorize(),single.upload('artimg'), createarticle);
 router.get('/auction', authorize(),getactive);
 router.get('/:id', authorize(), getArtById);
 
 module.exports = router;
 
   function createarticle(req, res, next) {
+      
+    let complarticle = Object.assign(req.body, req.file)
+
     articleService.create(req.body)
         .then(() => res.json({ message: 'Creation successful' }))
      .catch(next);
