@@ -1,7 +1,6 @@
 import React, { Component} from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/upload.css'
-import Cookies from 'universal-cookie';
 import Navigation from './navbar';
 import userauth from './auth.js';
 
@@ -24,7 +23,8 @@ this.getuserdaten()
     Price:'',
     timeforauctionA: "",
     timeforauctionE: "",
-    user: ""
+    user: "",
+artimg: ""
   }
 }
 
@@ -85,7 +85,7 @@ errormessage = () =>{
 
 
 render(){
-  const {articleName, articleDescription, Price, timeforauctionA, timeforauctionE} = this.state;
+  const {articleName, articleDescription, Price, timeforauctionA, timeforauctionE, artimg} = this.state;
 
 
 return(
@@ -115,7 +115,7 @@ return(
       </div>
       <div class="form-group">
         <label for="Price">Start Preis</label>
-        <input type="text" name="Price" class="form-control" id="Price" placeholder="Start Preis" value={Price} onChange={this.changeHandler} required></input>
+        <input type="number" name="Price" class="form-control" id="Price" placeholder="Start Preis" value={Price} onChange={this.changeHandler} required></input>
       
       </div>
       <div class="form-group">
@@ -124,6 +124,12 @@ return(
         <label for="articleName">Ende Auktion</label>
         <div class="time-wrapper"><input type="time" name="timeforauctionE" id ="timeforauctionE" value={timeforauctionE} onChange={this.changeHandler} required></input></div>
       </div>
+      <div class="form-group">
+        <label for="artimg">Bild auswählen</label>
+        <input type="file" name="artimg" class="form-control" id="artimg" placeholder="Bild hochladen" valie={artimg} onChange={this.changeHandler} required></input>
+      
+      </div>
+
 
       <button type="submit" class="btn btn-primary">Artikel Einstellen</button>
 

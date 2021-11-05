@@ -14,7 +14,7 @@ module.exports = {
 };
 
 async function create(params) {
-
+   
     await db.Article.create(params);
 }
 
