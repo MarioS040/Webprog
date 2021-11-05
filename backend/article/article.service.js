@@ -18,6 +18,7 @@ async function create(params) {
     await db.Article.create(params);
 }
 
+//ruft die Asynchrone Funktion getArticle auf und gibt diese wieder an die Article.controller zurück. die Daten werden dann wieder returned und anschließend ausgegeben
 async function getArtById(id) {
     return await getArticle(id);
 }
@@ -33,7 +34,7 @@ async function getArtactive(){
 }
 
 
-
+//finden des Artikels anhand der ID, der Primary Key wird in der Datenbank abgefragt
 async function getArticle(id) {
     const Article = await db.Article.findByPk(id);
     if (!Article) throw 'Article not found';

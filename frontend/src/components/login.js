@@ -10,7 +10,14 @@ const cookies = new Cookies();
 let loginfailed ;
 let resptoken;
 
-
+/*
+Der Login vorgang sieht folgende Schritte vor
+1. Prüfen der Credentials gegen das Backend mit fetch.
+2. Setzen des localStorage items "isAuthenticated" zur verwendung der privateRoutes und der Navbar, welche sich entsprechend 
+ändert, ob der User eingeloggt ist oder nicht
+3. Setzen des Token Cookies, hier wird als Value der Bearer Token gespeichert, mit diesm kann sich gegen das Backend authentifiert werden,
+wenn dieser im Header mitgesendet wird. (siehe bspw. Upload Funktion)
+*/
 
 
 class login extends Component{
@@ -23,13 +30,13 @@ super(props)
 }
 
 
-
+// Bei Änderungen in der HTML Form, werden diese an die State Variablen "übertragen"
 changeHandler = async (e) =>{
 this.setState({[e.target.name]:e.target.value})
 
 }
 
-
+// Übertragen der Daten an das Backend, aufgrund der proxy einstellungen im packacke.json kann hier der gleiche Port wie auch für das frontend verwendet werden
 submitHandler = (e) =>{
 e.preventDefault()
 
@@ -49,7 +56,7 @@ body: JSON.stringify(this.state)
 
 }
 
-
+// async await, dass der Cookie gesetzt werden kann
  loginfailure = async () => {
   
   
@@ -62,7 +69,7 @@ if(loginfailed == "200"){
   
     
 
-
+// aufgrund der errormessage, wenn der Status.code 400 oder 500 ist
 this.errormessage();
 
   }

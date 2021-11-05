@@ -6,6 +6,12 @@ import Navigation from './navbar';
 
 const cookies = new Cookies();
 
+/*
+Bei Logout wird der Cookie aus dem Browser des users gelöscht sowie das LocalStorage Item removed, sodass der User nur noch die entsprechende 
+Objekte siehte, und der TOken nicht mehr in seinem Browser gespeichert ist.
+*/
+
+
 function logout (){
 
 

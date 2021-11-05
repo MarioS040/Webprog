@@ -9,7 +9,7 @@ function model(sequelize) {
         Price: { type: DataTypes.STRING, allowNull: false },
         artimg: { type: DataTypes.STRING, allowNull:  true},
         yabeart: { type: DataTypes.STRING, allowNull: true },
-        timeforauction: { type: DataTypes.STRING, allowNull: true },
+        timeforauction: { type: DataTypes.STRING, allowNull: false },
     };
 
     

@@ -5,10 +5,8 @@ const authorize = require('_middleware/authorize');
 const db = require('_helpers/db');
 
 
-
-
 router.post('/create', authorize(), createarticle);
-router.get('/auction', getactive);
+router.get('/auction', authorize(),getactive);
 router.get('/:id', authorize(), getArtById);
 
 module.exports = router;

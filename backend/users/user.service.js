@@ -18,8 +18,8 @@ async function authenticate({ username, password }) {
     if (!user || !(await bcrypt.compare(password, user.hash)))
         throw 'Username or password is incorrect';
 
-    // authentication successful
-    const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });
+    // Erfolgreiche Authentifizierung
+    const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });  // 7 Tage "lebensdauer" des jwt tokens, aufgrund von "7d", könnte geändert werden
     return { ...omitHash(user.get()), token };
 }
 
@@ -32,35 +32,35 @@ async function getById(id) {
 }
 
 async function create(params) {
-    // validate
+    // Validierung, ob der User bzw. der Benutzername schon existiert
     if (await db.User.findOne({ where: { username: params.username } })) {
         throw 'Username "' + params.username + '" is already taken';
     }
 
-    // hash password
+    // Password wird mit bycrpyt gehashed (hier könnte falls gewünscht noch ein "salt" eingefügt werden)
     if (params.password) {
         params.hash = await bcrypt.hash(params.password, 10);
     }
 
-    // save user
+    // User in der Datenbank einstellen
     await db.User.create(params);
 }
 
 async function update(id, params) {
     const user = await getUser(id);
 
-    // validate
+    // Validierung
     const usernameChanged = params.username && user.username !== params.username;
     if (usernameChanged && await db.User.findOne({ where: { username: params.username } })) {
         throw 'Username "' + params.username + '" is already taken';
     }
 
-    // hash password if it was entered
+    // password hashen
     if (params.password) {
         params.hash = await bcrypt.hash(params.password, 10);
     }
 
-    // copy params to user and save
+    // parameter in den user kopieren 
     Object.assign(user, params);
     await user.save();
 
@@ -72,7 +72,7 @@ async function _delete(id) {
     await user.destroy();
 }
 
-// helper functions
+// Zusätzliche Funktionen
 
 async function getUser(id) {
     const user = await db.User.findByPk(id);

@@ -6,6 +6,17 @@ const authorize = require('_middleware/authorize')
 const userService = require('./user.service');
 
 // routes
+
+/*
+Ablauf von User.controller und article.controller ist identisc aufgebaut, 
+1. route wird mit get oder post aufgerufen.
+2.Aufrufen der Funktionen. muss eine Route authentifiziert werden, da z.b. etwas in der Datenbank geändert wird,
+    oder abgefragt wird, was nicht jeder ohne Authentifizierung sehen soll wird bei den entsprechenden Routen 
+    die "authorize()" aufgerufen
+3. in User.Service werden die ensprechenden Abfragen bzw. inserts in die Datenbank vorgenommen, diese returnen 
+   wieder an users/article.controller.
+*/
+
 router.post('/authenticate', authenticateSchema, authenticate);
 router.post('/register', registerSchema, register);
 router.get('/', authorize(), getAll);

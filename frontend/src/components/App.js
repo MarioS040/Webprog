@@ -7,6 +7,12 @@ import logout from './logout';
 import upload from './upload';
 
 
+/*PrivateRoutes können nur aufgerufen werden, werdeb im local Storage, isAuthenticated auf True gesetzt ist,
+jedoch bietet dies keine Sichherheit, dies dient lediglich zur besseren User Führung.
+
+Ein User könnte diesen Eintrag im local Storage auch manuell setzten, eine "richtige" authentifizierung findet durch das senden des Bearer tokens an das backend statt
+hierfür wird die auth.js verwendet.
+*/
 
 function App() {
   return (
