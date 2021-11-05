@@ -3,25 +3,26 @@ const router = express.Router();
 const articleService = require('./article.service');
 const authorize = require('_middleware/authorize');
 const db = require('_helpers/db');
-var multer = require('multer');
+const multer = require('multer');
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-      cb(null, './upload');
+      cb(null, './uploads');
    },
   filename: function (req, file, cb) {
       cb(null , getRandomInt(999999999999) + file.originalname);
   }
 });
 
+const upload = multer({storage: storage})
 
 
-router.post('/create', authorize(),single.upload('artimg'), createarticle);
+
+router.post('/create', authorize(), upload.single('artimg'), createarticle);
 router.get('/auction', authorize(),getactive);
 router.get('/:id', authorize(), getArtById);
 
