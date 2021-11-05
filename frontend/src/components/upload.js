@@ -6,30 +6,49 @@ import Navigation from './navbar';
 import userauth from './auth.js';
 
 
-const token = userauth();
-let artid ;
-let myCurrentDate = new Date();
+
+
+
+let token;
+let username;
+
+
 
 class login extends Component{
 constructor(props){
 super(props)
+this.getuserdaten()
   this.state ={
     articleName:'',
     articleDescription:'',
     Price:'',
-    timeforauction: myCurrentDate + 1 // +1, da sonst eine falsche Zeit ausgegeben wird in der Datenbank und somit später bei der SQL Abfrage es zu fehlern kommt
+    timeforauctionA: "",
+    timeforauctionE: "",
+    user: ""
   }
 }
+
+
+getuserdaten = async()=>{
+
+let userdaten = await userauth();
+
+username = userdaten.derusername;
+token = userdaten.complusertoken;
+
+this.setState({user: username})
+
+}
+
 
 
 
 changeHandler = async (e) =>{
 this.setState({[e.target.name]:e.target.value})
-
 }
 
 
-submitHandler = (e) =>{
+submitHandler = async (e) =>{
 e.preventDefault()
 
 
@@ -41,8 +60,8 @@ body: JSON.stringify(this.state)
 }
 
 )
-.then((response) => response.json().then((response) => artid = response.id).then(console.log(response.id)))
-.then(console.log(artid))
+.then((response) => response.json())
+.then((response) => {console.log(response)})
 
 
 
@@ -66,7 +85,7 @@ errormessage = () =>{
 
 
 render(){
-  const {articleName, articleDescription, Price, timeforauction} = this.state;
+  const {articleName, articleDescription, Price, timeforauctionA, timeforauctionE} = this.state;
 
 
 return(
@@ -86,27 +105,29 @@ return(
     <form onSubmit={this.submitHandler}>
   
       <div class="form-group">
-        <label for="articleName">Artikel Name*</label>
+        <label for="articleName">Artikel Name</label>
         <input type="text" name="articleName" class="form-control" id="articleName" placeholder="Artikel Bezeichnung" value={articleName} onChange={this.changeHandler} required></input>
       </div>
       <div class="form-group">
-        <label for="articleDescription">Artikel Beschreibung*</label>
+        <label for="articleDescription">Artikel Beschreibung</label>
         <input type="text" name="articleDescription" class="form-control" id="articleDescription" placeholder="Artikel Beschreibung" value={articleDescription} onChange={this.changeHandler} required></input>
       
       </div>
       <div class="form-group">
-        <label for="Price">Start Preis*</label>
+        <label for="Price">Start Preis</label>
         <input type="text" name="Price" class="form-control" id="Price" placeholder="Start Preis" value={Price} onChange={this.changeHandler} required></input>
       
       </div>
       <div class="form-group">
-        <label for="Price">Starten um (optional)</label>
-        <div class="time-wrapper"><input type="time" name="timeforauction" id ="timeforauction" value={timeforauction} onChange={this.changeHandler}></input></div>
+      <label for="articleName">Start Auktion</label>
+        <div class="time-wrapper"><input type="time" name="timeforauctionA" id ="timeforauctionA" value={timeforauctionA} onChange={this.changeHandler} required></input></div>
+        <label for="articleName">Ende Auktion</label>
+        <div class="time-wrapper"><input type="time" name="timeforauctionE" id ="timeforauctionE" value={timeforauctionE} onChange={this.changeHandler} required></input></div>
       </div>
 
       <button type="submit" class="btn btn-primary">Artikel Einstellen</button>
 
-      <label for="Price">mit * markierte Felder sind pflicht</label>
+     
       <hr />
      
       

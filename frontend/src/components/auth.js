@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import { Next } from 'react-bootstrap/esm/PageItem';
 
 /*
 Funktion zum erhalten des Cookies, der den Token entählt, so kann in den weiteren 
@@ -12,13 +13,33 @@ Wird benötigt um bei einer Anfrage an das Backend diesen Token mitzusenden und 
 
 
 const cookies = new Cookies();
-function userauth(){
 
+let derusername;
 let usertoken = cookies.get('token');
 let complusertoken = 'Bearer ' + usertoken;
 
+async function userauth(){
 
-return (complusertoken)
+
+
+
+
+
+await fetch('http://localhost:3000/users/current', {
+method: 'GET',
+headers: {"content-type": "application/json",
+         "Authorization": complusertoken}
+})
+.then((response) => response.json())
+.then((responseJson) => {derusername = responseJson.username;
+})
+
+    
+
+
+
+
+return {derusername, complusertoken}
 
 
 }
