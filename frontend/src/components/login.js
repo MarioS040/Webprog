@@ -1,9 +1,10 @@
 import React, { Component} from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './css/register.css'
+import './css/login.css'
 import Cookies from 'universal-cookie';
 import Navigation from './navbar';
 import {Link } from 'react-router-dom';
+import { Next } from 'react-bootstrap/esm/PageItem';
 
 const cookies = new Cookies();
 let loginfailed ;
@@ -40,8 +41,9 @@ body: JSON.stringify(this.state)
 }
 
 )
-.then((response) => response.json().then(loginfailed = response.status).then((response) => resptoken = response.token))
-.then(this.loginfailure())
+.then((response) => response.json().then(loginfailed = response.status).then((response) => resptoken = response.token)).then(()=>this.loginfailure())
+
+.catch(Next)
 
 
 
@@ -53,7 +55,7 @@ body: JSON.stringify(this.state)
   
 if(loginfailed == "200"){
 
- await(cookies.set("token", resptoken , {secure: true}))
+   await(cookies.set("token", resptoken , {secure: true}))
   window.localStorage.setItem("isAuthenticated", "true")
   window.location.href = "http://localhost:3000/home"
   }else if(loginfailed == "400" || loginfailed == "500"){

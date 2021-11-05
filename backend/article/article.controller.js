@@ -6,8 +6,10 @@ const db = require('_helpers/db');
 
 
 
+
 router.post('/create', authorize(), createarticle);
-router.get('/:id', authorize(), getarticle);
+router.get('/auction', getactive);
+router.get('/:id', authorize(), getArtById);
 
 module.exports = router;
 
@@ -17,8 +19,16 @@ module.exports = router;
      .catch(next);
 }
 
-function getarticle(req, res, next) {
+function getArtById(req, res, next) {
   articleService.getArtById(req.params.id)
       .then(Article => res.json(Article))
       .catch(next);
 }
+
+  function getactive(req, res, next){
+  articleService.getArtactive()
+  .then(Article => res.json(Article))
+  .catch(next);
+
+}
+

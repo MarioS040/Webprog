@@ -8,7 +8,6 @@
   
   .div-center {
     width: 400px;
-    border-radius: 25px;
     height: 400px;
     background-color: #fff;
     position: absolute;
@@ -29,17 +28,20 @@
   div.content {
     display: table-cell;
     vertical-align: middle;
+  }
+
+  .btn {
+margin-top: 1em;
 
   }
 
+  label{
 
-  .btn {
-    margin-top: 1em;
-    
-      }
-    
-      label{
-    
-    
-        padding-top: 1.5em;
-      }
+
+    padding-top: 1.5em;
+  }
+
+.time-wrapper{
+
+  width: 100%;
+}

@@ -7,7 +7,7 @@ import userauth from './auth';
 export default function home(){
 
 
-let dername = userauth();
+
 
 return(
 
@@ -15,7 +15,7 @@ return(
     <div>
        
        <Navigation/>
-        hallo welt {dername}
+        hallo welt 
     </div>
 )
 

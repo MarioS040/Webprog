@@ -24,8 +24,10 @@ function isregistered (){
   if (localStorage.getItem('isAuthenticated')){
 return(
   <>
+       <Nav.Link href="/Auktionen">Auktionen</Nav.Link>
       <Nav.Link href="/upload">Upload</Nav.Link>
       <Nav.Link href="/suche">Suche</Nav.Link>
+      
     </>
 )
   }
@@ -49,8 +51,7 @@ return(
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="me-auto">
-      <Nav.Link href="/home">home</Nav.Link>
-      <Nav.Link href="/bieten">bieten</Nav.Link>
+      <Nav.Link href="/Artikel">Artikel</Nav.Link>
         {isregistered()}
     </Nav>
     {notregistered()}

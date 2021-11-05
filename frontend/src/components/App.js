@@ -4,6 +4,7 @@ import login from './login';
 import home from './home';
 import PrivateRoute from './protectedRoute';
 import logout from './logout';
+import upload from './upload';
 
 
 
@@ -20,7 +21,9 @@ function App() {
 <Route path="/register" component={register} />
 <Route path="/login" component={login} />
 <Route path="/logout" component={logout} />
-<PrivateRoute path="/home" component={home} />
+<PrivateRoute path="/upload" component={upload} />
+<Route path="/home" component={home} />
+<Route exact path="/" component={home} />
 </Switch>
 </Router>
 </div>
