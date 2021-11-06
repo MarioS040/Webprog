@@ -3,13 +3,15 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/upload.css'
 import Navigation from './navbar';
 import userauth from './auth.js';
+import { Form } from 'react-bootstrap';
+import axios from 'axios';
 
 
 
 
 
 let token;
-let username;
+
 
 
 
@@ -17,14 +19,20 @@ class login extends Component{
 constructor(props){
 super(props)
 this.getuserdaten()
-  this.state ={
+  this.state =
+    {
     articleName:'',
     articleDescription:'',
     Price:'',
     timeforauctionA: "",
     timeforauctionE: "",
-    user: "",
-artimg: ""
+    username: "mario"
+  }
+
+  this.filestate ={
+    
+    fileimg: null
+
   }
 }
 
@@ -33,15 +41,17 @@ getuserdaten = async()=>{
 
 let userdaten = await userauth();
 
-username = userdaten.derusername;
 token = userdaten.complusertoken;
 
-this.setState({user: username})
+
 
 }
 
 
+fileselectedhandler = async(e)=>{
+this.filestate = e.target.files[0]
 
+}
 
 changeHandler = async (e) =>{
 this.setState({[e.target.name]:e.target.value})
@@ -52,11 +62,13 @@ submitHandler = async (e) =>{
 e.preventDefault()
 
 
-fetch('http://localhost:3000/article/create', {
+
+fetch('http://localhost:3000/article/create',{
 method: 'POST',
 headers: {"content-type": "application/json",
          "Authorization": token},
-body: JSON.stringify(this.state)
+body:    JSON.stringify(this.state)
+  
 }
 
 )
@@ -85,8 +97,8 @@ errormessage = () =>{
 
 
 render(){
-  const {articleName, articleDescription, Price, timeforauctionA, timeforauctionE, artimg} = this.state;
-
+  const {articleName, articleDescription, Price, timeforauctionA, timeforauctionE} = this.state;
+  const {fileimg} = this.filestate;
 
 return(
 
@@ -125,8 +137,8 @@ return(
         <div class="time-wrapper"><input type="time" name="timeforauctionE" id ="timeforauctionE" value={timeforauctionE} onChange={this.changeHandler} required></input></div>
       </div>
       <div class="form-group">
-        <label for="artimg">Bild auswählen</label>
-        <input type="file" name="artimg" class="form-control" id="artimg" placeholder="Bild hochladen" valie={artimg} onChange={this.changeHandler} required></input>
+        <label for="path">Bild auswählen</label>
+        <input type="file" name="fileimg" class="form-control" id="fileimg" placeholder="Bild hochladen" value={fileimg} onChange={this.fileselectedhandler} required></input>
       
       </div>
 
