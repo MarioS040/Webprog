@@ -51,6 +51,18 @@ token = userdaten.complusertoken;
 fileselectedhandler = async(e)=>{
 this.filestate = e.target.files[0]
 
+const fd = new FormData();
+fd.append('fileimg', this.filestate)
+
+
+await fetch('http://localhost:3000/article/imgupload',{
+method: 'POST',
+headers: {"Authorization": token},
+body: fd
+})
+.then((response) => response.json())
+.then((response) => {this.setState({path : response.filename })})
+
 }
 
 changeHandler = async (e) =>{
@@ -61,19 +73,6 @@ this.setState({[e.target.name]:e.target.value})
 submitHandler = async (e) =>{
 e.preventDefault()
 
-const fd = new FormData();
-fd.append('fileimg', this.filestate)
-
-
-
-
-await fetch('http://localhost:3000/article/imgupload',{
-method: 'POST',
-headers: {"Authorization": token},
-body: fd
-})
-.then((response) => response.json())
-.then((response) => {this.setState({path : response.filename })})
 
 
 fetch('http://localhost:3000/article/create',{
