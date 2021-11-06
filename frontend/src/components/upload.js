@@ -26,6 +26,7 @@ this.getuserdaten()
     Price:'',
     timeforauctionA: "",
     timeforauctionE: "",
+    path: ""
   }
 
   this.filestate ={
@@ -59,16 +60,27 @@ this.setState({[e.target.name]:e.target.value})
 
 submitHandler = async (e) =>{
 e.preventDefault()
-let file = {"file": this.filestate}
-let artbody = {"body": JSON.stringify(this.state)}
-let compl = Object.assign(artbody, file)
-console.log(compl)
+
+const fd = new FormData();
+fd.append('fileimg', this.filestate)
+
+
+
+
+await fetch('http://localhost:3000/article/imgupload',{
+method: 'POST',
+headers: {"Authorization": token},
+body: fd
+})
+.then((response) => response.json())
+.then((response) => {this.setState({path : response.filename })})
+
 
 fetch('http://localhost:3000/article/create',{
 method: 'POST',
 headers: {"content-type": "application/json",
          "Authorization": token},
-body:    JSON.stringify(this.state)
+body:   JSON.stringify(this.state)
   
 }
 

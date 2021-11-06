@@ -9,9 +9,17 @@ module.exports = {
    
     create,
     getArtById,
-    getArtactive
+    getArtactive,
+    upload
     
 };
+
+async function upload(param){
+    let returnobject = {"filename" : param};
+
+    return (returnobject);
+}
+
 
 async function create(params) {
    
