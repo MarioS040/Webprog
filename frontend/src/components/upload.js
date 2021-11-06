@@ -26,7 +26,6 @@ this.getuserdaten()
     Price:'',
     timeforauctionA: "",
     timeforauctionE: "",
-    username: "mario"
   }
 
   this.filestate ={
@@ -60,8 +59,10 @@ this.setState({[e.target.name]:e.target.value})
 
 submitHandler = async (e) =>{
 e.preventDefault()
-
-
+let file = {"file": this.filestate}
+let artbody = {"body": JSON.stringify(this.state)}
+let compl = Object.assign(artbody, file)
+console.log(compl)
 
 fetch('http://localhost:3000/article/create',{
 method: 'POST',

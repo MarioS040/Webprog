@@ -22,7 +22,7 @@ const upload = multer({storage: storage})
 
 
 
-router.post('/create', authorize(), createarticle);
+router.post('/create', authorize(), createarticle, upload.single('fileimg'));
 router.get('/auction', authorize(),getactive);
 router.get('/:id', authorize(), getArtById);
 
@@ -30,10 +30,11 @@ module.exports = router;
 
   function createarticle(req, res, next) {
       console.log(req)
-     let theusername = {"username" : req.user.username}
+
+    let theusername = {"username" : req.user.username}
     let complarticle = Object.assign(req.body, theusername)
    console.log(complarticle)
-    articleService.create(req.body)
+    articleService.create(complarticle)
     .then(() => res.json({ message: 'Creation successful' }))
      .catch(next);
 }
