@@ -40,7 +40,20 @@ return(
      <Button type="button" class="btn-sm"> <Nav.Link href="/logout">Logout</Nav.Link> </Button>
   </Nav>
 )
+  } 
+}
+
+
+function isyabeempl(){
+  if (localStorage.getItem('isyabeempl')){
+return(
+<Nav>
+<Nav.Link href="/yabeupload">Yabe upload</Nav.Link>
+  </Nav>
+)
   }
+
+
 }
 
 
@@ -53,6 +66,7 @@ return(
     <Nav className="me-auto">
       <Nav.Link href="/Artikel">Artikel</Nav.Link>
         {isregistered()}
+        {isyabeempl()}
     </Nav>
     {notregistered()}
     {logoutregistred()}

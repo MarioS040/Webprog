@@ -7,9 +7,6 @@ import { Form } from 'react-bootstrap';
 import axios from 'axios';
 
 
-
-
-
 let token;
 
 
@@ -27,7 +24,6 @@ this.getuserdaten()
     timeforauctionA: "",
     timeforauctionE: "",
     path: "",
-    yabeart: "false"
   }
 
   this.filestate ={
@@ -76,7 +72,7 @@ e.preventDefault()
 
 
 
-fetch('http://localhost:3000/article/create',{
+fetch('http://localhost:3000/article/createyabeart',{
 method: 'POST',
 headers: {"content-type": "application/json",
          "Authorization": token},

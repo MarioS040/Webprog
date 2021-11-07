@@ -10,9 +10,24 @@ module.exports = {
     create,
     getArtById,
     getArtactive,
-    upload
+    upload,
+    createyabeart
     
 };
+
+
+async function createyabeart(req){
+
+    if(req.user.yabeempl == "false"){
+    throw "nicht gestattet";
+       
+      }else if(req.user.yabeempl == "true"){
+        let theusername = {"username" : req.user.username}
+        let complarticle = Object.assign(req.body, theusername)
+
+        await db.Article.create(complarticle);
+
+}}
 
 async function upload(param){
     let returnobject = {"filename" : param};

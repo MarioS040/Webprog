@@ -5,6 +5,7 @@ import home from './home';
 import PrivateRoute from './protectedRoute';
 import logout from './logout';
 import upload from './upload';
+import yabeupload from './yabeupload';
 
 
 /*PrivateRoutes können nur aufgerufen werden, werdeb im local Storage, isAuthenticated auf True gesetzt ist,
@@ -26,6 +27,7 @@ function App() {
 
 <Route path="/register" component={register} />
 <Route path="/login" component={login} />
+<Route path="/yabeupload" component={yabeupload} />
 <Route path="/logout" component={logout} />
 <PrivateRoute path="/upload" component={upload} />
 <Route path="/home" component={home} />

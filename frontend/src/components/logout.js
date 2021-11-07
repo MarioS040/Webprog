@@ -18,6 +18,7 @@ function logout (){
     function userlogout(){
 
         window.localStorage.removeItem("isAuthenticated");
+        window.localStorage.removeItem("isyabeempl");
         cookies.remove('token');
         console.log("erfolg")
         }

@@ -22,19 +22,31 @@ const upload = multer({storage: storage})
 
 
 
-router.post('/create', authorize(), createarticle,);
+router.post('/create', authorize(), createarticle);
+router.post('/createyabeart', authorize(), createarticleyabe);
 router.post('/imgupload', authorize(),  upload.single('fileimg'),  imgupload,)
 router.get('/auction', authorize(),getactive);
 router.get('/:id', authorize(), getArtById);
 
 module.exports = router;
 
+
+function createarticleyabe(req, res, next) {
+//zusätzlich, so ist es für nicht yabeemployes nicht möglich yabeartikel hochzuladen
+  articleService.createyabeart(req)
+  .then(() => res.json({ message: 'Creation successful' }))
+   .catch(next);
+
+}
+
+
   function createarticle(req, res, next) {
   
     console.log(req)
-      
+    //notyabeart zur Sichherit, so kann keiner beliebig über die REST-API das Property "yabert" : true mitsenden 
+    let notyabeart = {"yabeart" : "false"} 
     let theusername = {"username" : req.user.username}
-    let complarticle = Object.assign(req.body, theusername)
+    let complarticle = Object.assign(req.body, theusername, notyabeart)
 
     articleService.create(complarticle)
     .then(() => res.json({ message: 'Creation successful' }))

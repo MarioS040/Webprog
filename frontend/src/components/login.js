@@ -9,6 +9,8 @@ import { Next } from 'react-bootstrap/esm/PageItem';
 const cookies = new Cookies();
 let loginfailed ;
 let resptoken;
+let deryabeempl;
+
 
 /*
 Der Login vorgang sieht folgende Schritte vor
@@ -27,6 +29,7 @@ super(props)
     username:'',
     password:''
   }
+  this.responsestate ={data : null}
 }
 
 
@@ -37,22 +40,19 @@ this.setState({[e.target.name]:e.target.value})
 }
 
 // Übertragen der Daten an das Backend, aufgrund der proxy einstellungen im packacke.json kann hier der gleiche Port wie auch für das frontend verwendet werden
-submitHandler = (e) =>{
+submitHandler = async (e) =>{
 e.preventDefault()
 
 
-fetch('http://localhost:3000/users/authenticate', {
+await fetch('http://localhost:3000/users/authenticate', {
 method: 'POST',
 headers: {"content-type": "application/json"},
 body: JSON.stringify(this.state)
 }
 
 )
-.then((response) => response.json().then(loginfailed = response.status).then((response) => resptoken = response.token)).then(()=>this.loginfailure())
-
+.then((response) => response.json().then(loginfailed = response.status).then((response) => {deryabeempl = response.yabeempl; return response}).then((response) => resptoken = response.token).then(()=> this.loginfailure()))
 .catch(Next)
-
-
 
 }
 
@@ -61,9 +61,17 @@ body: JSON.stringify(this.state)
   
   
 if(loginfailed == "200"){
-
+   console.log(deryabeempl)
    await(cookies.set("token", resptoken , {secure: true}))
   window.localStorage.setItem("isAuthenticated", "true")
+
+if(deryabeempl == "true"){
+
+  window.localStorage.setItem("isyabeempl", "true")
+}
+
+
+
   window.location.href = "http://localhost:3000/home"
   }else if(loginfailed == "400" || loginfailed == "500"){
   

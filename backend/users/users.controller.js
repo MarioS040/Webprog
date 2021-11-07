@@ -46,13 +46,21 @@ function registerSchema(req, res, next) {
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
         username: Joi.string().required(),
+        username: Joi.string().required(),
         password: Joi.string().min(6).required()
     });
     validateRequest(req, next, schema);
 }
 
 function register(req, res, next) {
-    userService.create(req.body)
+    //Variable yabeempl wird dazu verwendet, dass bei dem Registrierungs Vorgang
+    //der Datenbank Eintrag yabeempl auf "false" gesettz wird, dass keiner die Berechtigung erlangen kann
+    //über die Standard Registrierung die Artikel der Firma Yabe zu  löschen oder hochzuladen
+    
+    let yabeempl = {"yabeempl" : "false"}
+    let complete = Object.assign(req.body, yabeempl)
+
+    userService.create(complete)
         .then(() => res.json({ message: 'Registration successful' }))
         .catch(next);
 }
