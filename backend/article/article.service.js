@@ -15,7 +15,12 @@ module.exports = {
     
 };
 
-
+/*
+createyabeart  bzw yabeartikel "creator", muss aufgrund der vorgabe der Firma Yabe im Backend 
+die Aktuelle Zeit + 15 Minuten rechnen für die Auktionen. Somit kann über eine REST-Anfrage 
+auch ohne Zeitangabe die Zeit in der Datenbank gespeichert werden. Somit ist ein einfacheres Handling 
+für API Anfragen gewärleistet.
+*/
 async function createyabeart(req){
 
     if(req.user.yabeempl == "false"){
@@ -28,13 +33,8 @@ async function createyabeart(req){
         let minutenende = minuten + 15;
         let uhrzeit = stunden + ":" + minuten;
         let uhrzeitende = stunden + ":" + minutenende;
-
         let beginnauction = {"timeforauctionA": uhrzeit}
         let endauction =  {"timeforauctionE" : uhrzeitende}
-
-        console.log(uhrzeit)
-
-
         let theusername = {"username" : req.user.username}
         let complarticle = Object.assign(req.body, theusername, beginnauction, endauction)
 
