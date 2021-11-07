@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
       cb(null, './uploads');
    },
   filename: function (req, file, cb) {
-      cb(null , getRandomInt(999999999999) + file.originalname);
+      cb(null , getRandomInt(9999999999999999) + file.originalname);
   }
 });
 
@@ -42,7 +42,7 @@ function createarticleyabe(req, res, next) {
 
   function createarticle(req, res, next) {
   
-    console.log(req)
+    
     //notyabeart zur Sichherit, so kann keiner beliebig über die REST-API das Property "yabert" : true mitsenden 
     let notyabeart = {"yabeart" : "false"} 
     let theusername = {"username" : req.user.username}

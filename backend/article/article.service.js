@@ -27,6 +27,7 @@ async function createyabeart(req){
     throw "nicht gestattet";
        
       }else if(req.user.yabeempl == "true"){
+       //Berechnung und Ausgabe der Uhrzeit für Anfang Auction und ende Auction
         let date = new Date();
         let stunden = date.getHours();
         let minuten = date.getMinutes();
@@ -35,9 +36,14 @@ async function createyabeart(req){
         let uhrzeitende = stunden + ":" + minutenende;
         let beginnauction = {"timeforauctionA": uhrzeit}
         let endauction =  {"timeforauctionE" : uhrzeitende}
+       
+       //username für den Artikel wird im Backend gespeichert
         let theusername = {"username" : req.user.username}
-        let complarticle = Object.assign(req.body, theusername, beginnauction, endauction)
 
+        //yabeartikel mit aufgrund des uploads über createyabeart auf "true" gesetzt
+        let yabeart = {"yabeart" : "true"}
+
+        let complarticle = Object.assign(req.body, theusername, beginnauction, endauction, yabeart)
         await db.Article.create(complarticle);
 
 }}
