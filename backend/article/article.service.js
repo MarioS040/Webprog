@@ -22,8 +22,21 @@ async function createyabeart(req){
     throw "nicht gestattet";
        
       }else if(req.user.yabeempl == "true"){
+        let date = new Date();
+        let stunden = date.getHours();
+        let minuten = date.getMinutes();
+        let minutenende = minuten + 15;
+        let uhrzeit = stunden + ":" + minuten;
+        let uhrzeitende = stunden + ":" + minutenende;
+
+        let beginnauction = {"timeforauctionA": uhrzeit}
+        let endauction =  {"timeforauctionE" : uhrzeitende}
+
+        console.log(uhrzeit)
+
+
         let theusername = {"username" : req.user.username}
-        let complarticle = Object.assign(req.body, theusername)
+        let complarticle = Object.assign(req.body, theusername, beginnauction, endauction)
 
         await db.Article.create(complarticle);
 

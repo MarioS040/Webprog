@@ -21,9 +21,7 @@ this.getuserdaten()
     articleName:'',
     articleDescription:'',
     Price:'',
-    timeforauctionA: "",
-    timeforauctionE: "",
-    path: "",
+    path: ""
   }
 
   this.filestate ={
@@ -106,7 +104,7 @@ errormessage = () =>{
 
 
 render(){
-  const {articleName, articleDescription, Price, timeforauctionA, timeforauctionE} = this.state;
+  const {articleName, articleDescription, Price} = this.state;
   const {fileimg} = this.filestate;
 
 return(
@@ -138,12 +136,6 @@ return(
         <label for="Price">Start Preis</label>
         <input type="number" name="Price" class="form-control" id="Price" placeholder="Start Preis" value={Price} onChange={this.changeHandler} required></input>
       
-      </div>
-      <div class="form-group">
-      <label for="articleName">Start Auktion</label>
-        <div class="time-wrapper"><input type="time" name="timeforauctionA" id ="timeforauctionA" value={timeforauctionA} onChange={this.changeHandler} required></input></div>
-        <label for="articleName">Ende Auktion</label>
-        <div class="time-wrapper"><input type="time" name="timeforauctionE" id ="timeforauctionE" value={timeforauctionE} onChange={this.changeHandler} required></input></div>
       </div>
       <div class="form-group">
         <label for="path">Bild auswählen</label>
