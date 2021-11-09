@@ -28,10 +28,17 @@ router.post('/imgupload', authorize(),  upload.single('fileimg'),  imgupload,)
 router.get('/auction', authorize(),getactive);
 router.post('/bieten/:id', authorize(),artbieten);
 router.get('/getyabeart', authorize(), getyabeart);
+router.get('/myuploads', authorize(),getuploads);
 router.get('/:id', authorize(), getArtById);
 
 module.exports = router;
 
+
+function getuploads(req, res, next){
+articleService.getmyuploads(req.user.username)
+.then(Article => res.json(Article))
+.catch(next);
+}
 
 function getyabeart(req, res, next){
 articleService.getallyabeart()

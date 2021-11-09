@@ -14,7 +14,8 @@ module.exports = {
     upload,
     createyabeart,
     artbietenbyid,
-    getallyabeart
+    getallyabeart,
+    getmyuploads
     
 };
 
@@ -126,6 +127,19 @@ async function getArtactive(){
     return allActive[0]; // [0] da sonst ein Buffer bei der Ausgabe mitgegeben wurde, dies kann durch den INDEX [0] verhindert werden
 }
 
+
+async function getmyuploads(params){
+
+    const { host, port, user, password, database } = config.database;
+    const connection = await mysql.createConnection({ host, port, user, password, database });
+
+    const sqlquery = 'SELECT * FROM articles WHERE username = ' + '"'+ params +'"' +';';
+console.log(sqlquery)
+    const allActive = await connection.query(sqlquery)
+
+    return allActive[0];
+
+}
 
 
 
