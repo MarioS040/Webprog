@@ -12,7 +12,8 @@ module.exports = {
     getArtactive,
     upload,
     createyabeart,
-    artbietenbyid
+    artbietenbyid,
+    getallyabeart
     
 };
 
@@ -76,6 +77,16 @@ throw "Auf den Artikel kann nicht geboten werden";
 return "erfolg";
 
 }
+}
+
+async function getallyabeart(){
+    const { host, port, user, password, database } = config.database;
+    const connection = await mysql.createConnection({ host, port, user, password, database });
+
+    const allActiveyabeart = await connection.query("SELECT * FROM `articles` WHERE yabeart ='true' AND CURRENT_TIME BETWEEN timeforauctionA AND timeforauctionE;")
+
+
+    return allActiveyabeart[0];
 }
 
 
