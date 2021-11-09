@@ -85,9 +85,9 @@ body:   JSON.stringify(this.state)
 
 )
 .then((response) => response.json())
-.then((response) => {console.log(response)})
+.then((response) => { if(response.message === "Endzeit kann nicht vor Anfangszeit liegen"){this.errormessage()}else if(response.message === "Creation successful"){this.uploadmessage()} return response;})
 
-this.uploadmessage();
+
 
 
 }
@@ -101,8 +101,12 @@ uploadmessage = () =>{
   
  window.alert("Upload erfolgreich")
  window.location.reload();
-  
  
+}
+
+errormessage =() =>{
+
+  window.alert("Anfangszeit kann nicht vor Endzeit liegen")
 }
 
 

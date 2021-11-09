@@ -2,6 +2,7 @@ const { Connection } = require('mysql2');
 const db = require('_helpers/db');
 const config = require('config.json');
 const mysql = require('mysql2/promise');
+const { param } = require('./article.controller');
 
 
 
@@ -99,8 +100,15 @@ async function upload(param){
 
 
 async function create(params) {
+
+    if(params.timeforauctionA > params.timeforauctionE){
+        throw "Endzeit kann nicht vor Anfangszeit liegen"
+    }else if(params.timeforauctionE > params.timeforauctionA){
+        await db.Article.create(params);
+    }
+    
    
-    await db.Article.create(params);
+    
 }
 
 //ruft die Asynchrone Funktion getArticle auf und gibt diese wieder an die Article.controller zurück. die Daten werden dann wieder returned und anschließend ausgegeben

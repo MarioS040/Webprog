@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 
-
+//Konfiguration der Endpoints für die articles, somit kann 
 router.post('/create', authorize(), createarticle);
 router.post('/createyabeart', authorize(), createarticleyabe);
 router.post('/imgupload', authorize(),  upload.single('fileimg'),  imgupload,)

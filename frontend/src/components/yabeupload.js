@@ -94,6 +94,7 @@ uploadmessage = () =>{
   
   
  window.alert("Upload Erfgolreich")
+ window.location.reload();
   
   
  
