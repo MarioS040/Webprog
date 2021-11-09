@@ -11,7 +11,8 @@ module.exports = {
     getArtById,
     getArtactive,
     upload,
-    createyabeart
+    createyabeart,
+    artbietenbyid
     
 };
 
@@ -23,10 +24,10 @@ für API Anfragen gewärleistet.
 */
 async function createyabeart(req){
 
-    if(req.user.yabeempl == "false"){
+    if(req.user.yabeempl === "false"){
     throw "nicht gestattet";
        
-      }else if(req.user.yabeempl == "true"){
+      }else if(req.user.yabeempl === "true"){
        //Berechnung und Ausgabe der Uhrzeit für Anfang Auction und ende Auction
         let date = new Date();
         let stunden = date.getHours();
@@ -47,6 +48,36 @@ async function createyabeart(req){
         await db.Article.create(complarticle);
 
 }}
+
+async function artbietenbyid(req){
+    let userhighestbid = {"userhighestbid" : req.user.username}
+    let Price = {"Price" : req.body.Price}
+    const article = await getArticle(req.params.id);
+    const activeforbid = await getArtactive();
+
+    const found = activeforbid.find(element => element.id === article.id);
+    
+if(req.body.Price <= article.Price){
+//Vergleich des Body Prices mit dem aktuellen Preis, werfen der Fehlermeldung falls geringer
+throw "Erhöhen Sie das Gebot";
+
+}else if(req.user.username === article.username){
+// Usern ist es nicht gestattet auf eigene Artikel zu bieten. 
+throw "Sie können nicht auf Ihren eigenen Artikel bieten";
+}else if(found === undefined){
+//Es darf nur auf Artikel geboten werden, die auch in dem Array "allActive" aufgeführt werden
+throw "Auf den Artikel kann nicht geboten werden";
+}else if(req.body.Price > article.Price){
+    // Speichern des "updates" bzw. durchführen der Datenbank Änderung 
+    let complarticle = Object.assign(userhighestbid, Price)
+    Object.assign(article, complarticle);
+    await article.save();
+return "erfolg";
+
+}
+}
+
+
 
 async function upload(param){
     let returnobject = {"filename" : param};
@@ -74,6 +105,9 @@ async function getArtactive(){
    // const allActive = await connection.query("SELECT * FROM articles WHERE CURRENT_TIME > timeforauction;")
     return allActive[0]; // [0] da sonst ein Buffer bei der Ausgabe mitgegeben wurde, dies kann durch den INDEX [0] verhindert werden
 }
+
+
+
 
 
 //finden des Artikels anhand der ID, der Primary Key wird in der Datenbank abgefragt

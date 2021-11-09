@@ -26,10 +26,19 @@ router.post('/create', authorize(), createarticle);
 router.post('/createyabeart', authorize(), createarticleyabe);
 router.post('/imgupload', authorize(),  upload.single('fileimg'),  imgupload,)
 router.get('/auction', authorize(),getactive);
+router.post('/bieten/:id', authorize(),artbieten);
 router.get('/:id', authorize(), getArtById);
 
 module.exports = router;
 
+
+function artbieten(req, res, next){
+
+  articleService.artbietenbyid(req)
+  .then(() => res.json({ message: 'bieten erfogreich' }))
+  .catch(next);
+
+}
 
 function createarticleyabe(req, res, next) {
 //zusätzlich, so ist es für nicht yabeemployes nicht möglich yabeartikel hochzuladen
