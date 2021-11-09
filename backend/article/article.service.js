@@ -54,7 +54,8 @@ async function artbietenbyid(req){
     let Price = {"Price" : req.body.Price}
     const article = await getArticle(req.params.id);
     const activeforbid = await getArtactive();
-
+    //suchen des Artikels auf den Geboten werden soll in dem Array, der durch getArtactive zurückgeliefert wird.
+    //ist found === undefined, steht der Artikel nicht bereit zum bieten. andernfalls steht dieser bereit zur Auktion
     const found = activeforbid.find(element => element.id === article.id);
     
 if(req.body.Price <= article.Price){
@@ -62,7 +63,7 @@ if(req.body.Price <= article.Price){
 throw "Erhöhen Sie das Gebot";
 
 }else if(req.user.username === article.username){
-// Usern ist es nicht gestattet auf eigene Artikel zu bieten. 
+// Usern ist es nicht gestattet auf eigene Artikel zu bieten. So könnten Sie die Preise "hochtreiben".
 throw "Sie können nicht auf Ihren eigenen Artikel bieten";
 }else if(found === undefined){
 //Es darf nur auf Artikel geboten werden, die auch in dem Array "allActive" aufgeführt werden
