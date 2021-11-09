@@ -27,7 +27,6 @@ this.getuserdaten()
     timeforauctionA: "",
     timeforauctionE: "",
     path: "",
-    yabeart: "false"
   }
 
   this.filestate ={
@@ -88,6 +87,7 @@ body:   JSON.stringify(this.state)
 .then((response) => response.json())
 .then((response) => {console.log(response)})
 
+this.uploadmessage();
 
 
 }
@@ -96,11 +96,11 @@ body:   JSON.stringify(this.state)
 
  
 
-errormessage = () =>{
+uploadmessage = () =>{
   
   
- window.alert("Nutzername oder Passwort falsch")
-  
+ window.alert("Upload erfolgreich")
+ window.location.reload();
   
  
 }

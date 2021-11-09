@@ -55,7 +55,7 @@ async function artbietenbyid(req){
     const article = await getArticle(req.params.id);
     const activeforbid = await getArtactive();
     //suchen des Artikels auf den Geboten werden soll in dem Array, der durch getArtactive zurückgeliefert wird.
-    //ist found === undefined, steht der Artikel nicht bereit zum bieten. andernfalls steht dieser bereit zur Auktion
+    //ist found === undefined, steht der Artikel nicht bereit zum bieten. andernfalls steht dieser bereit zur Auktion.
     const found = activeforbid.find(element => element.id === article.id);
     
 if(req.body.Price <= article.Price){
