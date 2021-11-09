@@ -83,17 +83,17 @@ body:   JSON.stringify(this.state)
 .then((response) => {console.log(response)})
 
 
-
+this.uploadmessage();
 }
 
 
 
  
 
-errormessage = () =>{
+uploadmessage = () =>{
   
   
- window.alert("Nutzername oder Passwort falsch")
+ window.alert("Upload Erfgolreich")
   
   
  
