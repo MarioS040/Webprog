@@ -29,12 +29,22 @@ router.get('/auction', authorize(),getactive);
 router.post('/bieten/:id', authorize(),artbieten);
 router.get('/getyabeart', authorize(), getyabeart);
 router.get('/myuploads', authorize(),getuploads);
+router.get('/search', authorize(), searcharticle);
 router.delete('/:id', authorize(), deletearticle);
 router.put('/:id', authorize(), updatearticle);
 router.get('/:id', authorize(), getArtById);
 
 
 module.exports = router;
+
+function searcharticle(req, res, next){
+  const searchQuery = req.query.search;
+  
+  articleService.search(searchQuery)
+  .then(Article => res.json(Article))
+  .catch(next);
+
+}
 
 
 function updatearticle(req, res, next){
