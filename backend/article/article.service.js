@@ -15,7 +15,8 @@ module.exports = {
     createyabeart,
     artbietenbyid,
     getallyabeart,
-    getmyuploads
+    getmyuploads,
+    deletearticlebyid
     
 };
 
@@ -51,6 +52,23 @@ async function createyabeart(req){
         await db.Article.create(complarticle);
 
 }}
+
+
+
+async function deletearticlebyid(articleid, user){
+  
+    const article = await getArtById(articleid);
+     
+    if(user != article.username){
+
+        throw "Artikel anderer User können nicht gelöscht werden"
+    }else if(user === article.username){
+        await article.destroy();
+        return "Artikel gelöscht."
+    }
+
+
+}
 
 async function artbietenbyid(req){
     let userhighestbid = {"userhighestbid" : req.user.username}
@@ -134,7 +152,7 @@ async function getmyuploads(params){
     const connection = await mysql.createConnection({ host, port, user, password, database });
 
     const sqlquery = 'SELECT * FROM articles WHERE username = ' + '"'+ params +'"' +';';
-console.log(sqlquery)
+
     const allActive = await connection.query(sqlquery)
 
     return allActive[0];

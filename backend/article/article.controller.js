@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 
-//Konfiguration der Endpoints für die articles, somit kann 
+//Konfiguration der Endpoints für die articles, somit werden mit den entsprechenden Befehlen die FUnktionen aufgerufen
 router.post('/create', authorize(), createarticle);
 router.post('/createyabeart', authorize(), createarticleyabe);
 router.post('/imgupload', authorize(),  upload.single('fileimg'),  imgupload,)
@@ -29,9 +29,20 @@ router.get('/auction', authorize(),getactive);
 router.post('/bieten/:id', authorize(),artbieten);
 router.get('/getyabeart', authorize(), getyabeart);
 router.get('/myuploads', authorize(),getuploads);
+router.delete('/:id', authorize(), deletearticle);
 router.get('/:id', authorize(), getArtById);
 
+
 module.exports = router;
+
+
+function deletearticle(req, res, next){
+  
+  articleService.deletearticlebyid(req.params.id, req.user.username)
+  .then(Article => res.json(Article))
+  .catch(next);
+
+}
 
 
 function getuploads(req, res, next){
