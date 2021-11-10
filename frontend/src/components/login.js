@@ -62,8 +62,8 @@ body: JSON.stringify(this.state)
   
 if(loginfailed == "200"){
    console.log(deryabeempl)
-   await(cookies.set("token", resptoken , {secure: true}))
-  window.localStorage.setItem("isAuthenticated", "true")
+   await(cookies.set("token", resptoken , {secure: true}))//setzen des Cookies auf dem Endgerät
+  window.localStorage.setItem("isAuthenticated", "true") //setzten des LocalStorage keys, sodass der User mit dem Browser als authentifiziert gilt
 
 if(deryabeempl == "true"){
 
