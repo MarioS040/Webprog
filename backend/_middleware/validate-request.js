@@ -2,13 +2,13 @@ module.exports = validateRequest;
 
 function validateRequest(req, next, schema) {
     const options = {
-        abortEarly: false, // include all errors
-        allowUnknown: true, // ignore unknown props
-        stripUnknown: true // remove unknown props
+        abortEarly: false, // Inkludieren aller Error
+        allowUnknown: true, // Ignorieren unbekannter props
+        stripUnknown: true // Entfernen unbekannter props
     };
     const { error, value } = schema.validate(req.body, options);
     if (error) {
-        next(`Validation error: ${error.details.map(x => x.message).join(', ')}`);
+        next(`Validierungs error: ${error.details.map(x => x.message).join(', ')}`);
     } else {
         req.body = value;
         next();
