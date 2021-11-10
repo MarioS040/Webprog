@@ -16,7 +16,7 @@ async function authenticate({ username, password }) {
     const user = await db.User.scope('withHash').findOne({ where: { username } });
 
     if (!user || !(await bcrypt.compare(password, user.hash)))
-        throw 'Username or password is incorrect';
+        throw 'Benutzername oder Passwort falsch';
 
     // Erfolgreiche Authentifizierung
     const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });  // 7 Tage "lebensdauer" des jwt tokens, aufgrund von "7d", könnte geändert werden
@@ -34,7 +34,7 @@ async function getById(id) {
 async function create(params) {
     // Validierung, ob der User bzw. der Benutzername schon existiert
     if (await db.User.findOne({ where: { username: params.username } })) {
-        throw 'Username "' + params.username + '" is already taken';
+        throw 'Benutzername "' + params.username + '" ist bereits vergeben';
     }
 
     // Password wird mit bycrpyt gehashed (hier könnte falls gewünscht noch ein "salt" eingefügt werden)
@@ -52,7 +52,7 @@ async function update(id, params) {
     // Validierung
     const usernameChanged = params.username && user.username !== params.username;
     if (usernameChanged && await db.User.findOne({ where: { username: params.username } })) {
-        throw 'Username "' + params.username + '" is already taken';
+        throw 'Benutzername "' + params.username + '" ist bereits vergeben';
     }
 
     // password hashen
@@ -76,7 +76,7 @@ async function _delete(id) {
 
 async function getUser(id) {
     const user = await db.User.findByPk(id);
-    if (!user) throw 'User not found';
+    if (!user) throw 'Benutzer nicht gefunden';
     return user;
 }
 

@@ -8,7 +8,7 @@ const userService = require('./user.service');
 // routes
 
 /*
-Ablauf von User.controller und article.controller ist identisc aufgebaut, 
+Ablauf von User.controller und article.controller ist identisch aufgebaut, 
 1. route wird mit get oder post aufgerufen.
 2.Aufrufen der Funktionen. muss eine Route authentifiziert werden, da z.b. etwas in der Datenbank geändert wird,
     oder abgefragt wird, was nicht jeder ohne Authentifizierung sehen soll wird bei den entsprechenden Routen 
@@ -61,7 +61,7 @@ function register(req, res, next) {
     let complete = Object.assign(req.body, yabeempl)
 
     userService.create(complete)
-        .then(() => res.json({ message: 'Registration successful' }))
+        .then(() => res.json({ message: 'Registrierung erfolgreich' }))
         .catch(next);
 }
 
@@ -99,6 +99,6 @@ function update(req, res, next) {
 
 function _delete(req, res, next) {
     userService.delete(req.params.id)
-        .then(() => res.json({ message: 'User deleted successfully' }))
+        .then(() => res.json({ message: 'User erfolgreich gelöscht' }))
         .catch(next);
 }
