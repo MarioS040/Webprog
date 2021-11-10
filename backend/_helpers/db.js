@@ -22,6 +22,6 @@ async function initialize() {
    
    
    
-    // sync all models with database
+    //"pushen" aller Modelle mit der Datenbank, hier wird der call eröffnet die ELemente in die Datenbank zu schreiben
     await sequelize.sync();
 }
