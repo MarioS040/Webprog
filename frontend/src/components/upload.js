@@ -85,7 +85,7 @@ body:   JSON.stringify(this.state)
 
 )
 .then((response) => response.json())
-.then((response) => { if(response.message === "Endzeit kann nicht vor Anfangszeit liegen"){this.errormessage()}else if(response.message === "Creation successful"){this.uploadmessage()} return response;})
+.then((response) => { if(response.message === "Endzeit kann nicht vor Anfangszeit liegen"){this.errormessage()}else if(response.message === "Artikel erfolgreich angelegt"){this.uploadmessage()} return response;})
 
 
 

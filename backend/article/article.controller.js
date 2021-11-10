@@ -69,7 +69,7 @@ function artbieten(req, res, next){
 function createarticleyabe(req, res, next) {
 //zusätzlich, so ist es für nicht yabeemployes nicht möglich yabeartikel hochzuladen
   articleService.createyabeart(req)
-  .then(() => res.json({ message: 'Creation successful' }))
+  .then(() => res.json({ message: 'Artikel erfolgreich angelegt' }))
    .catch(next);
 
 }
