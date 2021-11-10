@@ -60,7 +60,7 @@ async function search(searchparam){
     const { host, port, user, password, database } = config.database;
     const connection = await mysql.createConnection({ host, port, user, password, database });
      const searchquery = "SELECT * FROM articles WHERE articleName LIKE " +"'"+ "%" + searchparam +"%"+"'"+ ";";
-     console.log(searchquery)
+     
      const searchedarticles = await connection.query(searchquery)
 
      return searchedarticles[0];

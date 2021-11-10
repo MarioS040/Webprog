@@ -38,6 +38,9 @@ router.get('/:id', authorize(), getArtById);
 module.exports = router;
 
 function searcharticle(req, res, next){
+  /*searcQUery beeinhaltet alles nach search= in der URL, somit kann nach einer beliebigen Variable gesucht werden
+  SELECT * FROM articles WHERE articleName Like '%irgendwas%' somit werden alle Artikel ausgegeben, die ähnlich des Search Querys sind
+  */
   const searchQuery = req.query.search;
   
   articleService.search(searchQuery)
