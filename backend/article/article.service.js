@@ -16,7 +16,8 @@ module.exports = {
     artbietenbyid,
     getallyabeart,
     getmyuploads,
-    deletearticlebyid
+    deletearticlebyid,
+    updateearticlebyid
     
 };
 
@@ -53,7 +54,19 @@ async function createyabeart(req){
 
 }}
 
+async function updateearticlebyid(articleid, user, body){
+    const article = await getArtById(articleid);
 
+    if(user != article.username){
+
+        throw "Artikel anderer User können nicht bearbeitet werden"
+    }else if(user === article.username){ 
+             Object.assign(article, body);
+             await article.save();
+             return "Artikel erfolgreich geändert"
+    }
+
+}
 
 async function deletearticlebyid(articleid, user){
   

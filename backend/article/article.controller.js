@@ -30,11 +30,19 @@ router.post('/bieten/:id', authorize(),artbieten);
 router.get('/getyabeart', authorize(), getyabeart);
 router.get('/myuploads', authorize(),getuploads);
 router.delete('/:id', authorize(), deletearticle);
+router.put('/:id', authorize(), updatearticle);
 router.get('/:id', authorize(), getArtById);
 
 
 module.exports = router;
 
+
+function updatearticle(req, res, next){
+  articleService.updateearticlebyid(req.params.id, req.user.username, req.body)
+  .then(Article => res.json(Article))
+  .catch(next);
+
+}
 
 function deletearticle(req, res, next){
   
