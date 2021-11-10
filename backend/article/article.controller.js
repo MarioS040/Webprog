@@ -21,18 +21,18 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 
-//Konfiguration der Endpoints für die articles, somit werden mit den entsprechenden Befehlen die FUnktionen aufgerufen
-router.post('/create', authorize(), createarticle);
-router.post('/createyabeart', authorize(), createarticleyabe);
-router.post('/imgupload', authorize(),  upload.single('fileimg'),  imgupload,)
-router.get('/auction', authorize(),getactive);
-router.post('/bieten/:id', authorize(),artbieten);
-router.get('/getyabeart', authorize(), getyabeart);
-router.get('/myuploads', authorize(),getuploads);
-router.get('/search', authorize(), searcharticle);
-router.delete('/:id', authorize(), deletearticle);
-router.put('/:id', authorize(), updatearticle);
-router.get('/:id', authorize(), getArtById);
+//Konfiguration der Endpoints für die articles, somit werden mit den entsprechenden Befehlen die FUnktionen aufgerufen. alle routen mit Authorize() benötigen einen gültigen Token
+router.post('/create', authorize(), createarticle);               //Artikel hochladen 
+router.post('/createyabeart', authorize(), createarticleyabe);    //yabeartikel hochladen, nur möglich für user, die in der userdatenbank mit yabeempl = true gespeichert sind
+router.post('/imgupload', authorize(),  upload.single('fileimg'),  imgupload,)  //Bild hochladen
+router.get('/auction', authorize(),getactive);          //bekommen aller Artikel, die bei der aktuellen Zeit zwischen timeforauctionA und timeforauctionE legen
+router.post('/bieten/:id', authorize(),artbieten);       //bieten auf einen Artikel
+router.get('/getyabeart', authorize(), getyabeart);     //bekommen der ARtikel die in der Datenbank mit yabeart = true
+router.get('/myuploads', authorize(),getuploads);      // bekommen deer selbst hochgeladenen Artikel
+router.get('/search', authorize(), searcharticle);    //suchen anhand des Querys nach dem ?
+router.delete('/:id', authorize(), deletearticle);   //löschen eines Artikels
+router.put('/:id', authorize(), updatearticle);  //Artikel update
+router.get('/:id', authorize(), getArtById);     //bekommen der Artikel angaben für einen Artikel mit der ID
 
 
 module.exports = router;
