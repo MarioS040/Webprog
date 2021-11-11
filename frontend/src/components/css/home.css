@@ -1,0 +1,28 @@
+body{
+
+    background: #e2e2e2;
+}
+
+
+.center{
+    width: 50%;
+    margin: 0 auto;
+}
+
+
+.infotext{
+    text-align: center;
+   margin-top: 5px;
+
+
+}
+
+
+
+
+.infos-img{
+width: 100px;
+margin: auto;
+display: block;
+margin-top: 20px;
+}
