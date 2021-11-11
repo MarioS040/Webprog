@@ -15,8 +15,8 @@ return(
     <div>
        
        <Navigation/>
-        hallo welt 
-    </div>
+</div>
+
 )
 
 

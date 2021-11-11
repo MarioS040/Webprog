@@ -1,7 +1,5 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import { Next } from 'react-bootstrap/esm/PageItem';
+
 
 /*
 Funktion zum erhalten des Cookies, der den Token entählt, so kann in den weiteren 

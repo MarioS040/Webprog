@@ -3,8 +3,8 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/upload.css'
 import Navigation from './navbar';
 import userauth from './auth.js';
-import { Form } from 'react-bootstrap';
-import axios from 'axios';
+
+
 
 
 let token;
