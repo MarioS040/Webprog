@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navigation from './navbar';
 import userauth from './auth';
-import {Carousel, Col, Row, Image, Container} from 'react-bootstrap';
+import {Carousel, Col, Row, Image, Container, Button} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/home.css';
 
@@ -19,6 +19,7 @@ return(
        
        <Navigation/>
        </div>
+    <div>
  <div classname="container-flex starter">
        <Carousel>
   <Carousel.Item interval={2000}>
@@ -52,7 +53,7 @@ return(
 
 
 
-<div className="container-flex">
+<div className="container-fluid">
 <Container classname="center">
   <Row>
     <Col xs={6} md={4}>
@@ -71,11 +72,23 @@ return(
 </Container>
 </div>
 
+<div class="text">
+<Container classname="text">
+
+<Image className="logo center-img" src="logo.jpg" roundedCircle />
+<p class="p-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+<div class="center"><Button variant="secondary" href="/register">Registrieren</Button></div>
+</Container>
+
+</div>
+
+
+
 </div>
 
 
          </div>
-
+         </div>
 
 
 

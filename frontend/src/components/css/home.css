@@ -1,28 +1,59 @@
-body{
+.back{
 
-    background: #e2e2e2;
+    
+    width: 100%;
+    
 }
 
 
 .center{
     width: 50%;
     margin: 0 auto;
+    text-align: center;
 }
 
 
 .infotext{
     text-align: center;
-   margin-top: 5px;
+    margin-top: 5px;
 
 
 }
 
+.heading{
+    margin-top: 5vh;
+}
 
 
+.text{
+    
+    background-color: #e2e2e2;
+}
 
 .infos-img{
 width: 100px;
 margin: auto;
 display: block;
 margin-top: 20px;
+}
+
+.p-text{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    margin-top: 10px;
+}
+
+.logo{
+
+    width: 100px;
+
+}
+
+.center-img{
+    padding-top: 30px;
+    margin: auto;
+    display: block;
+
 }
