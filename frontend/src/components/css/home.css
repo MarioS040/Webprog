@@ -1,0 +1,100 @@
+.back{
+
+    
+    width: 100%;
+    
+}
+
+
+.center{
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+.infotext{
+    text-align: center;
+    margin-top: 5px;
+
+
+}
+
+.heading{
+    margin-top: 5vh;
+}
+
+
+.text{
+    
+    background-color: #e2e2e2;
+    padding-bottom: 40px;
+}
+
+.infos-img{
+width: 100px;
+margin: auto;
+display: block;
+margin-top: 20px;
+}
+
+.p-text{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    margin-top: 10px;
+}
+
+.logo{
+
+    width: 30px;
+    margin: auto;
+    display: block;
+    filter: invert(1);
+}
+.logo2{
+
+    width: 100px;
+
+}
+
+.center-img{
+    padding-top: 30px;
+    margin: auto;
+    display: block;
+
+}
+
+
+
+
+  .footer-main{
+    width:50%;
+    float: left;
+  }
+
+
+  .footer-img{
+    width:200px;
+
+    margin-left: 25%;
+   }
+
+  .footer-section{
+  float: left;
+  width: 16.66%;
+
+  }
+
+  .footer-header{
+  font-weight: bold;
+    text-decoration: underline;
+    font-size: 15px;
+  }
+
+  .informationen{
+
+    text-decoration: none;
+    color: black;
+  }
