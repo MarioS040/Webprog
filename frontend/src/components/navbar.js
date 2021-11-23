@@ -24,8 +24,10 @@ function isregistered (){
   if (localStorage.getItem('isAuthenticated')){
 return(
   <>
+       <Nav.Link href="/Auktionen">Auktionen</Nav.Link>
       <Nav.Link href="/upload">Upload</Nav.Link>
       <Nav.Link href="/suche">Suche</Nav.Link>
+      
     </>
 )
   }
@@ -38,7 +40,20 @@ return(
      <Button type="button" class="btn-sm"> <Nav.Link href="/logout">Logout</Nav.Link> </Button>
   </Nav>
 )
+  } 
+}
+
+
+function isyabeempl(){
+  if (localStorage.getItem('isyabeempl')){
+return(
+<Nav>
+<Nav.Link href="/yabeupload">Yabe upload</Nav.Link>
+  </Nav>
+)
   }
+
+
 }
 
 
@@ -49,9 +64,9 @@ return(
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="me-auto">
-      <Nav.Link href="/home">home</Nav.Link>
-      <Nav.Link href="/bieten">bieten</Nav.Link>
+      <Nav.Link href="/Artikel">Artikel</Nav.Link>
         {isregistered()}
+        {isyabeempl()}
     </Nav>
     {notregistered()}
     {logoutregistred()}

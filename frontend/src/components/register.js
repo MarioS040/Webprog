@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './css/register.css'
-import { withRouter } from 'react-router-dom';
+import {Link } from 'react-router-dom';
 import Navigation from './navbar';
 
 
@@ -72,7 +72,7 @@ return(
       </div>
       <button type="submit" class="btn btn-primary">Registrieren</button>
       <hr />
-      <button type="button" class="btn btn-link">Login</button>
+      <button type="button" class="btn btn-link"><Link to={'./login'}>Login </Link></button>
       
 
     </form>

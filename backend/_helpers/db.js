@@ -18,10 +18,10 @@ async function initialize() {
 
     // initialisieren der user und Artikel Datenbank
     db.User = require('../users/user.model')(sequelize);
-    db.article = require('../article/article.model')(sequelize);
+    db.Article = require('../article/article.model')(sequelize);
    
    
    
-    // sync all models with database
+    //"pushen" aller Modelle mit der Datenbank, hier wird der call eröffnet die ELemente in die Datenbank zu schreiben
     await sequelize.sync();
 }

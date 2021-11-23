@@ -22,9 +22,19 @@
     padding: 1em 2em;
     border-bottom: 2px solid #ccc;
     display: table;
+    border-radius: 25px;
   }
   
   div.content {
     display: table-cell;
     vertical-align: middle;
   }
+
+  .btn {
+    margin-top: 1em;
+    
+      }
+    
+  label{
+    padding-top: 1em;
+      }

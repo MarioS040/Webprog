@@ -6,19 +6,19 @@ module.exports = authorize;
 
 function authorize() {
     return [
-        // authenticate JWT token and attach decoded token to request as req.user
+        // Authentifizierung des JWT tokens mit HS256
         jwt({ secret, algorithms: ['HS256'] }),
 
-        // attach full user record to request object
+        // Anhängen des ganzen User Objektes
         async (req, res, next) => {
-            // get user with id from token 'sub' (subject) property
+            //user ID finden 
             const user = await db.User.findByPk(req.user.sub);
 
-            // check user still exists
+            // prüfung, ob der User noch existiert
             if (!user)
                 return res.status(401).json({ message: 'Unauthorized' });
 
-            // authorization successful
+            // Returne die Authenzifizierung
             req.user = user.get();
             next();
         }

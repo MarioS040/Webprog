@@ -1,33 +1,45 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
+
+/*
+Funktion zum erhalten des Cookies, der den Token entählt, so kann in den weiteren 
+Files diese Datei importiert werden und mit userauth() eine Variable beschrieben werden, 
+die den Token enthält.
+
+Wird benötigt um bei einer Anfrage an das Backend diesen Token mitzusenden und somit sich gegenüber des Backends zu Authentifizieren.
+*/
+
+
 const cookies = new Cookies();
-let userfirstname;
 
-const  userauth = () => {
-
-
-
+let derusername;
 let usertoken = cookies.get('token');
 let complusertoken = 'Bearer ' + usertoken;
 
-fetch('http://localhost:3000/users/current', {
+async function userauth(){
+
+
+
+
+
+
+await fetch('http://localhost:3000/users/current', {
 method: 'GET',
-withCredentials: true,
-headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'Authorization': complusertoken
-}
+headers: {"content-type": "application/json",
+         "Authorization": complusertoken}
+})
+.then((response) => response.json())
+.then((responseJson) => {derusername = responseJson.username;
+})
+
+    
+
+
+
+
+return {derusername, complusertoken}
+
 
 }
-
-).then((response) => response.json().then(response => console.log(userfirstname = response.firstName)))
-
-return (userfirstname)
-
-}
-
 
 export default userauth;

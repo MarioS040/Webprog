@@ -6,6 +6,17 @@ const authorize = require('_middleware/authorize')
 const userService = require('./user.service');
 
 // routes
+
+/*
+Ablauf von User.controller und article.controller ist identisch aufgebaut, 
+1. route wird mit get oder post aufgerufen.
+2.Aufrufen der Funktionen. muss eine Route authentifiziert werden, da z.b. etwas in der Datenbank geändert wird,
+    oder abgefragt wird, was nicht jeder ohne Authentifizierung sehen soll wird bei den entsprechenden Routen 
+    die "authorize()" aufgerufen
+3. in User.Service werden die ensprechenden Abfragen bzw. inserts in die Datenbank vorgenommen, diese returnen 
+   wieder an users/article.controller.
+*/
+
 router.post('/authenticate', authenticateSchema, authenticate);
 router.post('/register', registerSchema, register);
 router.get('/', authorize(), getAll);
@@ -35,14 +46,22 @@ function registerSchema(req, res, next) {
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
         username: Joi.string().required(),
+        username: Joi.string().required(),
         password: Joi.string().min(6).required()
     });
     validateRequest(req, next, schema);
 }
 
 function register(req, res, next) {
-    userService.create(req.body)
-        .then(() => res.json({ message: 'Registration successful' }))
+    //Variable yabeempl wird dazu verwendet, dass bei dem Registrierungs Vorgang
+    //der Datenbank Eintrag yabeempl auf "false" gesettz wird, dass keiner die Berechtigung erlangen kann
+    //über die Standard Registrierung die Artikel der Firma Yabe zu  löschen oder hochzuladen
+    
+    let yabeempl = {"yabeempl" : "false"}
+    let complete = Object.assign(req.body, yabeempl)
+
+    userService.create(complete)
+        .then(() => res.json({ message: 'Registrierung erfolgreich' }))
         .catch(next);
 }
 
@@ -80,6 +99,6 @@ function update(req, res, next) {
 
 function _delete(req, res, next) {
     userService.delete(req.params.id)
-        .then(() => res.json({ message: 'User deleted successfully' }))
+        .then(() => res.json({ message: 'User erfolgreich gelöscht' }))
         .catch(next);
 }
