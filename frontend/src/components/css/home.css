@@ -28,6 +28,7 @@
 .text{
     
     background-color: #e2e2e2;
+    padding-bottom: 40px;
 }
 
 .infos-img{
@@ -47,6 +48,13 @@ margin-top: 20px;
 
 .logo{
 
+    width: 30px;
+    margin: auto;
+    display: block;
+    filter: invert(1);
+}
+.logo2{
+
     width: 100px;
 
 }
@@ -57,3 +65,36 @@ margin-top: 20px;
     display: block;
 
 }
+
+
+
+
+  .footer-main{
+    width:50%;
+    float: left;
+  }
+
+
+  .footer-img{
+    width:200px;
+
+    margin-left: 25%;
+   }
+
+  .footer-section{
+  float: left;
+  width: 16.66%;
+
+  }
+
+  .footer-header{
+  font-weight: bold;
+    text-decoration: underline;
+    font-size: 15px;
+  }
+
+  .informationen{
+
+    text-decoration: none;
+    color: black;
+  }

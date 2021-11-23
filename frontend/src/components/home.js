@@ -4,7 +4,7 @@ import userauth from './auth';
 import {Carousel, Col, Row, Image, Container, Button} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/home.css';
-
+import Footer from './footer';
 
 
 export default function home(){
@@ -75,13 +75,14 @@ return(
 <div class="text">
 <Container classname="text">
 
-<Image className="logo center-img" src="logo.jpg" roundedCircle />
+<Image className="logo2 center-img" src="logo.jpg" roundedCircle />
 <p class="p-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 <div class="center"><Button variant="secondary" href="/register">Registrieren</Button></div>
 </Container>
 
 </div>
 
+<Footer />
 
 
 </div>

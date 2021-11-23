@@ -5,6 +5,10 @@ import Cookies from 'universal-cookie';
 import Navigation from './navbar';
 import {Link } from 'react-router-dom';
 import { Next } from 'react-bootstrap/esm/PageItem';
+import Footer from './footer';
+
+
+
 
 const cookies = new Cookies();
 let loginfailed ;
@@ -106,7 +110,7 @@ render(){
 
 return(
 
-
+  
 <div class="back">
 
 <Navigation />
@@ -114,7 +118,6 @@ return(
 
 
   <div class="content">
- 
 
     <h3>Login</h3>
     <hr />
@@ -123,25 +126,33 @@ return(
         <label for="Benutzername">Benutzername</label>
         <input type="text" name="username" class="form-control" id="username" placeholder="Benutzername" value={username} onChange={this.changeHandler}></input>
       </div>
+    
       <div class="form-group">
         <label for="Passwort">Passwort</label>
         <input type="password" name="password" class="form-control" id="password" placeholder="Password" value={password} onChange={this.changeHandler}></input>
       
+      
+      
+    
       </div>
 
       <button type="submit" class="btn btn-primary">login</button>
       <hr />
       <button type="button" class="btn btn-link"><Link to={'./register'}>Registrieren </Link></button>
       
-      
+
 
     </form>
-
+    
   </div>
+  
+
+</div>
+
 
 
 </div>
-</div>
+
 
 
 )
