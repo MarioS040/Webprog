@@ -3,7 +3,6 @@ import './css/artikelübersicht.css';
 import Navigation from './navbar';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import CardGroup from 'react-bootstrap/CardGroup'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
