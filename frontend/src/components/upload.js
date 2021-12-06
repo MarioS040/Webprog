@@ -149,9 +149,9 @@ return(
       </div>
       <div class="form-group">
       <label for="articleName">Start Auktion</label>
-        <div class="time-wrapper"><input type="time" name="timeforauctionA" id ="timeforauctionA" value={timeforauctionA} onChange={this.changeHandler} required></input></div>
+        <div class="time-wrapper"><input type="datetime-local" name="timeforauctionA" id ="timeforauctionA" value={timeforauctionA} onChange={this.changeHandler} required></input></div>
         <label for="articleName">Ende Auktion</label>
-        <div class="time-wrapper"><input type="time" name="timeforauctionE" id ="timeforauctionE" value={timeforauctionE} onChange={this.changeHandler} required></input></div>
+        <div class="time-wrapper"><input type="datetime-local" name="timeforauctionE" id ="timeforauctionE" value={timeforauctionE} onChange={this.changeHandler} required></input></div>
       </div>
       <div class="form-group">
         <label for="path">Bild auswählen</label>

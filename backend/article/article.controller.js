@@ -99,7 +99,7 @@ console.log(req)
 
   function createarticle(req, res, next) {
   
-    
+ 
     //notyabeart zur Sichherit, so kann keiner beliebig über die REST-API das Property "yabert" : true mitsenden 
     let notyabeart = {"yabeart" : "false"} 
     let theusername = {"username" : req.user.username}

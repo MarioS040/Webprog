@@ -146,8 +146,9 @@ async function upload(param){
 
 
 async function create(params) {
-
+    console.log(params)
     if(params.timeforauctionA > params.timeforauctionE){
+        console.log("hier")
         throw "Endzeit kann nicht vor Anfangszeit liegen"
     }else if(params.timeforauctionE > params.timeforauctionA){
         await db.Article.create(params);
@@ -167,7 +168,7 @@ async function getArtactive(){
     const { host, port, user, password, database } = config.database;
     const connection = await mysql.createConnection({ host, port, user, password, database });
 
-    const allActive = await connection.query("SELECT * FROM `articles` WHERE CURRENT_TIME BETWEEN timeforauctionA AND timeforauctionE;")
+    const allActive = await connection.query("SELECT * FROM `articles` WHERE CURRENT_TIMESTAMP BETWEEN timeforauctionA AND timeforauctionE;")
    // const allActive = await connection.query("SELECT * FROM articles WHERE CURRENT_TIME > timeforauction;")
     return allActive[0]; // [0] da sonst ein Buffer bei der Ausgabe mitgegeben wurde, dies kann durch den INDEX [0] verhindert werden
 }
