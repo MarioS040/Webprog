@@ -106,7 +106,7 @@ console.log(req)
     let complarticle = Object.assign(req.body, theusername, notyabeart)
 
     articleService.create(complarticle)
-    .then(() => res.json({ message: 'Creation successful' }))
+    .then(() => res.json({ message: 'Artikel erfolgreich angelegt' }))
      .catch(next);
 }
 
