@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Navigation from './navbar';
-import userauth from './auth';
 import {Carousel, Col, Row, Image, Container, Button} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/home.css';
