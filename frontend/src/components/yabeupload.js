@@ -82,8 +82,8 @@ body:   JSON.stringify(this.state)
 .then((response) => response.json())
 .then((response) => {console.log(response)})
 
-
-this.uploadmessage();
+console.log(this.state)
+//this.uploadmessage();
 }
 
 
@@ -93,7 +93,7 @@ this.uploadmessage();
 uploadmessage = () =>{
   
   
- window.alert("Upload Erfgolreich")
+ window.alert("Upload Erfolgreich")
  window.location.reload();
   
   

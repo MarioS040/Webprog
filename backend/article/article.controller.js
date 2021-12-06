@@ -24,7 +24,7 @@ const upload = multer({storage: storage})
 //Konfiguration der Endpoints für die articles, somit werden mit den entsprechenden Befehlen die FUnktionen aufgerufen. alle routen mit Authorize() benötigen einen gültigen Token
 router.post('/create', authorize(), createarticle);               //Artikel hochladen 
 router.post('/createyabeart', authorize(), createarticleyabe);    //yabeartikel hochladen, nur möglich für user, die in der userdatenbank mit yabeempl = true gespeichert sind
-router.post('/imgupload', authorize(),  upload.single('fileimg'),  imgupload,)  //Bild hochladen
+router.post('/imgupload', authorize(),  upload.single('fileimg'),  imgupload)  //Bild hochladen
 router.get('/auction', authorize(),getactive);          //bekommen aller Artikel, die bei der aktuellen Zeit zwischen timeforauctionA und timeforauctionE legen
 router.post('/bieten/:id', authorize(),artbieten);       //bieten auf einen Artikel
 router.get('/getyabeart', authorize(), getyabeart);     //bekommen der ARtikel die in der Datenbank mit yabeart = true
@@ -89,6 +89,7 @@ function artbieten(req, res, next){
 
 function createarticleyabe(req, res, next) {
 //zusätzlich, so ist es für nicht yabeemployes nicht möglich yabeartikel hochzuladen
+console.log(req)
   articleService.createyabeart(req)
   .then(() => res.json({ message: 'Artikel erfolgreich angelegt' }))
    .catch(next);
@@ -123,7 +124,7 @@ function getArtById(req, res, next) {
 }
 
 function imgupload(req, res, next){
-
+console.log(req)
 articleService.upload(req.file.filename)
 .then(Article => res.json(Article))
 .then(Article => res.derfilename)
