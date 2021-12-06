@@ -80,7 +80,7 @@ body:   JSON.stringify(this.state)
 
 )
 .then((response) => response.json())
-.then((response) => {console.log(response)})
+.then((response) => {if(response.message === "Artikel erfolgreich angelegt"){this.uploadmessage()} return response;})
 
 console.log(this.state)
 //this.uploadmessage();
