@@ -18,6 +18,8 @@ app.use('/article', require('./article/article.controller'));
 // global error handler
 app.use(errorHandler);
 
+app.use('/uploads', express.static('uploads'));
+
 // starten des servers
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 8080;
 app.listen(port, () => console.log('Server listening on port ' + port));
