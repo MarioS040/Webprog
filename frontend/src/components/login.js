@@ -5,7 +5,6 @@ import Cookies from 'universal-cookie';
 import Navigation from './navbar';
 import {Link } from 'react-router-dom';
 import { Next } from 'react-bootstrap/esm/PageItem';
-import Footer from './footer';
 
 
 
