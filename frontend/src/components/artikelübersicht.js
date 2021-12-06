@@ -81,6 +81,7 @@ export default function(){
             bidtime={10000}
         />
 
+
         </Row>
 
         </div>
