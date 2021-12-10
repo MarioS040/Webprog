@@ -26,6 +26,7 @@ router.post('/create', authorize(), createarticle);
 router.post('/imgupload', authorize(),  upload.single('fileimg'), imgupload) 
 router.post('/createyabeart', authorize(), createarticleyabe);    //yabeartikel hochladen, nur möglich für user, die in der userdatenbank mit yabeempl = true gespeichert sind
 router.post('/upload', authorize(),  upload.single('fileimg'), articleupload)  //Artikel hochladen
+router.post('/yabeupload', authorize(),  upload.single('fileimg'), yabeeupload) 
 router.get('/auction', authorize(),getactive);          //bekommen aller Artikel, die bei der aktuellen Zeit zwischen timeforauctionA und timeforauctionE legen
 router.post('/bieten/:id', authorize(),artbieten);       //bieten auf einen Artikel
 router.get('/getyabeart', authorize(), getyabeart);     //bekommen der ARtikel die in der Datenbank mit yabeart = true
@@ -91,7 +92,7 @@ function artbieten(req, res, next){
 function createarticleyabe(req, res, next) {
 //zusätzlich, so ist es für nicht yabeemployes nicht möglich yabeartikel hochzuladen
 
-  articleService.createyabeart(req)
+  articleService.uploadyabeart(req)
   .then(() => res.json({ message: 'Artikel erfolgreich angelegt' }))
    .catch(next);
 
@@ -130,6 +131,20 @@ function articleupload(req, res, next){
   let complarticle = Object.assign(req.body, theusername, notyabeart, imgpath)
 
   articleService.create(complarticle)
+  .then(() => res.json({ message: 'Artikel erfolgreich angelegt' }))
+  .catch(next);
+}
+
+function yabeeupload(req, res, next){
+
+  let notyabeart = {"yabeart" : "true"} 
+  let theusername = {"username" : req.user.username}
+  let imgpath = {"path" : req.file.filename}
+  let isyabeempl = {"yabeempl": req.user.yabeempl}
+
+  let complarticle = Object.assign(req.body, theusername, notyabeart, imgpath, isyabeempl)
+console.log(complarticle)
+  articleService.createyabeart(complarticle)
   .then(() => res.json({ message: 'Artikel erfolgreich angelegt' }))
   .catch(next);
 }
