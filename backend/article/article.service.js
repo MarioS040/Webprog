@@ -146,12 +146,13 @@ async function upload(param){
 
 
 async function create(params) {
-    console.log(params)
+    
     if(params.timeforauctionA > params.timeforauctionE){
-        console.log("hier")
         throw "Endzeit kann nicht vor Anfangszeit liegen"
     }else if(params.timeforauctionE > params.timeforauctionA){
+        console.log(params)
         await db.Article.create(params);
+        return ("Artikel erfolgreich angelegt")
     }
     
    
