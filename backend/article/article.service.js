@@ -155,7 +155,7 @@ async function create(params) {
         return ("Artikel erfolgreich angelegt")
     }
     
-   
+    throw "Artikel konnte nicht angelegt werden"
     
 }
 

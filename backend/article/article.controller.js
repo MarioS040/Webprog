@@ -22,9 +22,10 @@ const upload = multer({storage: storage})
 
 
 //Konfiguration der Endpoints für die articles, somit werden mit den entsprechenden Befehlen die FUnktionen aufgerufen. alle routen mit Authorize() benötigen einen gültigen Token
-router.post('/create', authorize(), createarticle);               //Artikel hochladen 
+router.post('/create', authorize(), createarticle);     
+router.post('/imgupload', authorize(),  upload.single('fileimg'), imgupload) 
 router.post('/createyabeart', authorize(), createarticleyabe);    //yabeartikel hochladen, nur möglich für user, die in der userdatenbank mit yabeempl = true gespeichert sind
-router.post('/imgupload', authorize(),  upload.single('fileimg'),  imgupload)  //Bild hochladen
+router.post('/upload', authorize(),  upload.single('fileimg'), articleupload)  //Artikel hochladen
 router.get('/auction', authorize(),getactive);          //bekommen aller Artikel, die bei der aktuellen Zeit zwischen timeforauctionA und timeforauctionE legen
 router.post('/bieten/:id', authorize(),artbieten);       //bieten auf einen Artikel
 router.get('/getyabeart', authorize(), getyabeart);     //bekommen der ARtikel die in der Datenbank mit yabeart = true
@@ -121,11 +122,23 @@ function getArtById(req, res, next) {
 
 }
 
-function imgupload(req, res, next){
+function articleupload(req, res, next){
 
-articleService.upload(req.file.filename)
-.then(Article => res.json(Article))
-.then(Article => res.derfilename)
-.catch(next);
+  let notyabeart = {"yabeart" : "false"} 
+  let theusername = {"username" : req.user.username}
+  let imgpath = {"path" : req.file.filename}
+  let complarticle = Object.assign(req.body, theusername, notyabeart, imgpath)
+
+  articleService.create(complarticle)
+  .then(() => res.json({ message: 'Artikel erfolgreich angelegt' }))
+  .catch(next);
 }
 
+function imgupload(req, res, next){
+
+  articleService.upload(req.file.filename)
+  .then(Article => res.json(Article))
+  .then(Article => res.derfilename)
+  .catch(next);
+
+}
