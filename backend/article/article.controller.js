@@ -89,7 +89,7 @@ function artbieten(req, res, next){
 
 function createarticleyabe(req, res, next) {
 //zusätzlich, so ist es für nicht yabeemployes nicht möglich yabeartikel hochzuladen
-console.log(req)
+
   articleService.createyabeart(req)
   .then(() => res.json({ message: 'Artikel erfolgreich angelegt' }))
    .catch(next);
@@ -122,7 +122,7 @@ function getArtById(req, res, next) {
 }
 
 function imgupload(req, res, next){
-console.log(req)
+
 articleService.upload(req.file.filename)
 .then(Article => res.json(Article))
 .then(Article => res.derfilename)
