@@ -18,7 +18,8 @@ module.exports = {
     getmyuploads,
     deletearticlebyid,
     updateearticlebyid,
-    search
+    search,
+    uploadyabeart
     
 };
 
@@ -29,11 +30,11 @@ auch ohne Zeitangabe die Zeit in der Datenbank gespeichert werden. Somit ist ein
 für API Anfragen gewärleistet.
 */
 async function createyabeart(req){
-
-    if(req.user.yabeempl === "false"){
+console.log(req.yabeempl)
+    if(req.yabeempl === "false"){
     throw "nicht gestattet";
        
-      }else if(req.user.yabeempl === "true"){
+      }else if(req.yabeempl === "true"){
        //Berechnung und Ausgabe der Uhrzeit für Anfang Auction und ende Auction
         let date = new Date();
         let stunden = date.getHours();
@@ -45,12 +46,11 @@ async function createyabeart(req){
         let endauction =  {"timeforauctionE" : uhrzeitende}
        
        //username für den Artikel wird im Backend gespeichert
-        let theusername = {"username" : req.user.username}
+    
 
         //yabeartikel mit aufgrund des uploads über createyabeart auf "true" gesetzt
-        let yabeart = {"yabeart" : "true"}
 
-        let complarticle = Object.assign(req.body, theusername, beginnauction, endauction, yabeart)
+        let complarticle = Object.assign(req, beginnauction, endauction)
         await db.Article.create(complarticle);
 
 }}
@@ -146,15 +146,16 @@ async function upload(param){
 
 
 async function create(params) {
-    console.log(params)
+    
     if(params.timeforauctionA > params.timeforauctionE){
-        console.log("hier")
         throw "Endzeit kann nicht vor Anfangszeit liegen"
     }else if(params.timeforauctionE > params.timeforauctionA){
+        console.log(params)
         await db.Article.create(params);
+        return ("Artikel erfolgreich angelegt")
     }
     
-   
+    throw "Artikel konnte nicht angelegt werden"
     
 }
 
@@ -186,6 +187,41 @@ async function getmyuploads(params){
     return allActive[0];
 
 }
+
+
+async function uploadyabeart(req){
+
+    if(req.user.yabeempl === "false"){
+       console.log(req.yabeempl)
+    if(req.yabeempl === "false"){
+    throw "nicht gestattet";
+       
+      }
+    else if(req.user.yabeempl === "true"){
+     
+       //Berechnung und Ausgabe der Uhrzeit für Anfang Auction und ende Auction
+        let date = new Date();
+        let stunden = date.getHours();
+        let minuten = date.getMinutes();
+        let minutenende = minuten + 15;
+        let uhrzeit = stunden + ":" + minuten;
+        let uhrzeitende = stunden + ":" + minutenende;
+        let beginnauction = {"timeforauctionA": uhrzeit}
+        let endauction =  {"timeforauctionE" : uhrzeitende}
+   
+       
+       //username für den Artikel wird im Backend gespeichert
+        let theusername = {"username" : req.user.username}
+    
+
+        //yabeartikel mit aufgrund des uploads über createyabeart auf "true" gesetzt
+        let yabeart = {"yabeart" : "true"}
+
+        let complarticle = Object.assign(req.body, theusername, beginnauction, endauction, yabeart)
+        await db.Article.create(complarticle);
+
+}}}
+
 
 
 

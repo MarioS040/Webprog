@@ -22,9 +22,11 @@ const upload = multer({storage: storage})
 
 
 //Konfiguration der Endpoints für die articles, somit werden mit den entsprechenden Befehlen die FUnktionen aufgerufen. alle routen mit Authorize() benötigen einen gültigen Token
-router.post('/create', authorize(), createarticle);               //Artikel hochladen 
+router.post('/create', authorize(), createarticle);     
+router.post('/imgupload', authorize(),  upload.single('fileimg'), imgupload) 
 router.post('/createyabeart', authorize(), createarticleyabe);    //yabeartikel hochladen, nur möglich für user, die in der userdatenbank mit yabeempl = true gespeichert sind
-router.post('/imgupload', authorize(),  upload.single('fileimg'),  imgupload)  //Bild hochladen
+router.post('/upload', authorize(),  upload.single('fileimg'), articleupload)  //Artikel hochladen
+router.post('/yabeupload', authorize(),  upload.single('fileimg'), yabeeupload) 
 router.get('/auction', authorize(),getactive);          //bekommen aller Artikel, die bei der aktuellen Zeit zwischen timeforauctionA und timeforauctionE legen
 router.post('/bieten/:id', authorize(),artbieten);       //bieten auf einen Artikel
 router.get('/getyabeart', authorize(), getyabeart);     //bekommen der ARtikel die in der Datenbank mit yabeart = true
@@ -89,8 +91,8 @@ function artbieten(req, res, next){
 
 function createarticleyabe(req, res, next) {
 //zusätzlich, so ist es für nicht yabeemployes nicht möglich yabeartikel hochzuladen
-console.log(req)
-  articleService.createyabeart(req)
+
+  articleService.uploadyabeart(req)
   .then(() => res.json({ message: 'Artikel erfolgreich angelegt' }))
    .catch(next);
 
@@ -98,8 +100,6 @@ console.log(req)
 
 
   function createarticle(req, res, next) {
-  
- 
     //notyabeart zur Sichherit, so kann keiner beliebig über die REST-API das Property "yabert" : true mitsenden 
     let notyabeart = {"yabeart" : "false"} 
     let theusername = {"username" : req.user.username}
@@ -107,7 +107,7 @@ console.log(req)
 
     articleService.create(complarticle)
     .then(() => res.json({ message: 'Artikel erfolgreich angelegt' }))
-     .catch(next);
+    .catch(next);
 }
 
 function getArtById(req, res, next) {
@@ -123,11 +123,37 @@ function getArtById(req, res, next) {
 
 }
 
-function imgupload(req, res, next){
-console.log(req)
-articleService.upload(req.file.filename)
-.then(Article => res.json(Article))
-.then(Article => res.derfilename)
-.catch(next);
+function articleupload(req, res, next){
+
+  let notyabeart = {"yabeart" : "false"} 
+  let theusername = {"username" : req.user.username}
+  let imgpath = {"path" : req.file.filename}
+  let complarticle = Object.assign(req.body, theusername, notyabeart, imgpath)
+
+  articleService.create(complarticle)
+  .then(() => res.json({ message: 'Artikel erfolgreich angelegt' }))
+  .catch(next);
 }
 
+function yabeeupload(req, res, next){
+
+  let notyabeart = {"yabeart" : "true"} 
+  let theusername = {"username" : req.user.username}
+  let imgpath = {"path" : req.file.filename}
+  let isyabeempl = {"yabeempl": req.user.yabeempl}
+
+  let complarticle = Object.assign(req.body, theusername, notyabeart, imgpath, isyabeempl)
+console.log(complarticle)
+  articleService.createyabeart(complarticle)
+  .then(() => res.json({ message: 'Artikel erfolgreich angelegt' }))
+  .catch(next);
+}
+
+function imgupload(req, res, next){
+
+  articleService.upload(req.file.filename)
+  .then(Article => res.json(Article))
+  .then(Article => res.derfilename)
+  .catch(next);
+
+}
