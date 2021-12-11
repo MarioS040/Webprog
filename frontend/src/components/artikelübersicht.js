@@ -21,25 +21,18 @@ const Articles = [
 
     
 
-
+// Funktion um Artikel zu "Bauen", keys dienen der Position im Array, sodass bei der Übergabe klar ist, an welcher Stelle die einzelnen Werte sind
 
 const ArticleO = (props) => {
     return(
         <div className="Card">
-
-
-
-
-            
-            {Articles.map(props=>(
                 
                     
-                    
-                    <Card style={{ width: 'flex', float: 'left', margin: "20px" }}>
+                    <Card style={{ width: 'flex', margin: '20px'}}>
                         
                         <Card.Body>
 
-                            <tr key={props.id}>
+                            
                                 <Card.Img variant="top" src="https://th.bing.com/th/id/R.174d1d09fe1b5f15f427ea8411fe2a21?rik=GJ9zKw7M6IGbuA&pid=ImgRaw&r=0" />
                                 <Card.Title key={2}>{props.articleName}</Card.Title>
                                 <Card.Text key={3}>{props.articleDescription}</Card.Text>
@@ -48,37 +41,38 @@ const ArticleO = (props) => {
                                 <Button variant="primary">Zum Produkt</Button>
                                 <Button variant="secondary">Bieten</Button>
                 
-                            </tr>
+                            
 
                         </Card.Body>
                         
-                    </Card>
+                    </Card>  
+                     
                 
-                    
-                
-                
-            ))}
-        
-        
-
 
         </div>
-    )}
+)}
 
 
          
+/* {Articles.map(props=>(
+        <tr key={props.id}></tr> */
 
-
-
-
-export default function(){
+// Darstellung auf Website, hierbei wird das Array gemappt und die Werte über vorherdefinierte props weitergegeben
+export default function(props){
     return(
         <div>
         
             <Navigation/>
-        
-            <ArticleO></ArticleO>
-       
+            <Row xs={1} md={3} className="g-4">
+            
+            {Articles.map((props)=>{
+
+                return <ArticleO articleName={props.articleName} articleDescription={props.articleDescription} Price={props.Price} timeforauctionE={props.timeforauctionE} />;
+            })}
+
+            </Row>
+                 
+            
         </div>
         
     
