@@ -24,7 +24,7 @@ class artikelübersicht extends Component{
 
 // Darstellung auf Website, hierbei wird das Array gemappt und die Werte über vorherdefinierte props weitergegeben
   async componentWillMount(){
-   
+  
         let userdaten = await userauth();
         let token = await userdaten.complusertoken;
 
@@ -58,13 +58,12 @@ let imgpath = "http://localhost:3000/uploads/" + props.path
                             <Card.Body>
     
                                 
-                                    <Card.Img variant="top" src= {imgpath} />
+                                    <Card.Img variant="top" src= {imgpath} className='card-img-top'/>
                                     <Card.Title key={2}>{props.articleName}</Card.Title>
                                     <Card.Text key={3}>{props.articleDescription}</Card.Text>
                                     <Card.Subtitle key={4}>aktueller Preis: {props.Price} €</Card.Subtitle>
                                     <Card.Subtitle key={5}>Auktion endet am: {props.timeforauctionE}</Card.Subtitle>
                                     <Button variant="primary">Zum Produkt</Button>
-                                    <Button variant="secondary">Bieten</Button>
                     
                                 
     
@@ -83,7 +82,7 @@ let imgpath = "http://localhost:3000/uploads/" + props.path
     
             <Navigation/>
         
-            <Row xs={1} md={2} lg={3} className="g-4">
+            <Row xs={1} md={2} lg={4} className="g-4">
             
             {this.state.Articles.map((props)=>{
 
