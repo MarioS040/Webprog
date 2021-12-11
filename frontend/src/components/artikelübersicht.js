@@ -15,7 +15,7 @@ const Articles = [
     {id: 2, articleName: "Zwei Kisten Bananen", articleDescription: "Zwei Kisten Bananen, Ablaufdatum übermorgen", Price: "50€", timeforauctionE: "So. 29.12.2021"  },
     {id: 3, articleName: "Drei Kisten Bananen", articleDescription: "Drei Kisten Bananen, Ablaufdatum übermorgen", Price: "75€", timeforauctionE: "So. 29.12.2021"  },
     {id: 4, articleName: "Vier Kisten Bananen", articleDescription: "Vier Kisten Bananen, Ablaufdatum übermorgen", Price: "100€", timeforauctionE: "So. 29.12.2021"  }
-
+    
 ];
 
 
@@ -25,16 +25,18 @@ const Articles = [
 
 const ArticleO = (props) => {
     return(
-
-        
         <div className="Card">
-            
+
+
+
+
             
             {Articles.map(props=>(
-                <Row xs={1} md={1} className="g-4">
                 
                     
-                    <Card style={{ width: 'flex'}}>   
+                    
+                    <Card style={{ width: 'flex', float: 'left', margin: "20px" }}>
+                        
                         <Card.Body>
 
                             <tr key={props.id}>
@@ -49,18 +51,19 @@ const ArticleO = (props) => {
                             </tr>
 
                         </Card.Body>
+                        
                     </Card>
+                
                     
-                </Row>
+                
                 
             ))}
         
         
+
+
         </div>
-    )
-
-
-}
+    )}
 
 
          
