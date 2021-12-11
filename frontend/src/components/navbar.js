@@ -24,7 +24,7 @@ function isregistered (){
   if (localStorage.getItem('isAuthenticated')){
 return(
   <>
-       <Nav.Link href="/Auktionen">Auktionen</Nav.Link>
+       <Nav.Link href="/Artikelübersicht">Auktionen</Nav.Link>
       <Nav.Link href="/upload">Upload</Nav.Link>
       <Nav.Link href="/suche">Suche</Nav.Link>
       
