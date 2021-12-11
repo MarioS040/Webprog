@@ -14,8 +14,8 @@ const Articles = [
     {id: 1, articleName: "Eine Kiste Bananen", articleDescription: "Eine Kiste Bananen, Ablaufdatum übermorgen", Price: "22,99€", timeforauctionE: "So. 29.12.2021"  },
     {id: 2, articleName: "Zwei Kisten Bananen", articleDescription: "Zwei Kisten Bananen, Ablaufdatum übermorgen", Price: "50€", timeforauctionE: "So. 29.12.2021"  },
     {id: 3, articleName: "Drei Kisten Bananen", articleDescription: "Drei Kisten Bananen, Ablaufdatum übermorgen", Price: "75€", timeforauctionE: "So. 29.12.2021"  },
-    {id: 4, articleName: "Vier Kisten Bananen", articleDescription: "Vier Kisten Bananen, Ablaufdatum übermorgen", Price: "100€", timeforauctionE: "So. 29.12.2021"  }
-    
+    {id: 4, articleName: "Vier Kisten Bananen", articleDescription: "Vier Kisten Bananen, Ablaufdatum übermorgen", Price: "100€", timeforauctionE: "So. 29.12.2021"  },
+    {id: 5, articleName: "Fünf Kisten Bananen", articleDescription: "Fünf Kisten Bananen, Ablaufdatum heute", Price: "125", timeforauctionE: "So. 30.12.2021"  }
 ];
 
 
@@ -58,16 +58,18 @@ const ArticleO = (props) => {
         <tr key={props.id}></tr> */
 
 // Darstellung auf Website, hierbei wird das Array gemappt und die Werte über vorherdefinierte props weitergegeben
-export default function(props){
+export default function(){
     return(
         <div>
         
             <Navigation/>
-            <Row xs={1} md={3} className="g-4">
+
+            <Row xs={1} md={2} lg={3} className="g-4">
             
             {Articles.map((props)=>{
 
                 return <ArticleO articleName={props.articleName} articleDescription={props.articleDescription} Price={props.Price} timeforauctionE={props.timeforauctionE} />;
+                
             })}
 
             </Row>
