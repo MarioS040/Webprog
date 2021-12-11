@@ -6,7 +6,8 @@ import PrivateRoute from './protectedRoute';
 import logout from './logout';
 import upload from './upload';
 import yabeupload from './yabeupload';
-
+import artikel from './artikel'; 
+import artikelübersicht from './artikelübersicht';
 
 /*PrivateRoutes können nur aufgerufen werden, werdeb im local Storage, isAuthenticated auf True gesetzt ist,
 jedoch bietet dies keine Sichherheit, dies dient lediglich zur besseren User Führung.
@@ -32,6 +33,8 @@ function App() {
 <PrivateRoute path="/upload" component={upload} />
 <Route path="/home" component={home} />
 <Route exact path="/" component={home} />
+<Route path="/artikel" component={artikel} />
+<Route path="/artikelübersicht" component={artikelübersicht} />
 </Switch>
 </Router>
 </div>
