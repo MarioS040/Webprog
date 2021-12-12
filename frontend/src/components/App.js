@@ -34,7 +34,7 @@ function App() {
 <Route path="/home" component={home} />
 <Route exact path="/" component={home} />
 <Route path="/artikel" component={artikel} />
-<Route path="/artikelübersicht" component={artikelübersicht} />
+<PrivateRoute path="/artikelübersicht" component={artikelübersicht} />
 </Switch>
 </Router>
 </div>
