@@ -81,7 +81,7 @@ let imgpath = "http://localhost:3000/uploads/" + props.path
     
             <Navigation/>
         
-            <Row xs={1} md={2} lg={4} className="g-4">
+            <Row style={{width: "100%"}} xs={1} md={2} lg={4} className="g-4">
             
             {this.state.Articles.map((props)=>{
 
