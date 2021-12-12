@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import userauth from './auth.js';
 
-
+// Was macht das hier? 
 class artikelübersicht extends Component{
     constructor(props){
     super(props);
@@ -19,10 +19,9 @@ class artikelübersicht extends Component{
     
 
          
-/* {Articles.map(props=>(
-        <tr key={props.id}></tr> */
 
-// Darstellung auf Website, hierbei wird das Array gemappt und die Werte über vorherdefinierte props weitergegeben
+
+// Fetchen der Daten? 
   async componentWillMount(){
   
         let userdaten = await userauth();
@@ -45,10 +44,11 @@ class artikelübersicht extends Component{
 render(){
 
 
-// Funktion um Artikel zu "Bauen", keys dienen der Position im Array, sodass bei der Übergabe klar ist, an welcher Stelle die einzelnen Werte sind
+// Funktion um Artikel zu "Bauen", keys dienen der Position im Array (Nur ist die Frage, ob die Position jetzt noch so stimmt?)
+// sodass bei der Übergabe klar ist, an welcher Stelle die einzelnen Werte sind
   const  ArticleO = (props) => {
 
-let imgpath = "http://localhost:3000/uploads/" + props.path
+    let imgpath = "http://localhost:3000/uploads/" + props.path
         return(
             <div className="Card">
                     
