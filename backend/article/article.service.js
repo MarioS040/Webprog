@@ -205,14 +205,14 @@ async function getmybuys(params){
 
 async function uploadyabeart(req){
 
-    if(req.user.yabeempl === "false"){
-       console.log(req.yabeempl)
+
+       
     if(req.yabeempl === "false"){
     throw "nicht gestattet";
        
       }
     else if(req.user.yabeempl === "true"){
-     
+     console.log("hier")
        //Berechnung und Ausgabe der Uhrzeit für Anfang Auction und ende Auction
         let date = new Date();
         let stunden = date.getHours();
@@ -234,7 +234,7 @@ async function uploadyabeart(req){
         let complarticle = Object.assign(req.body, theusername, beginnauction, endauction, yabeart)
         await db.Article.create(complarticle);
 
-}}}
+}}
 
 
 

@@ -75,7 +75,7 @@ return(
 <Container classname="text">
 
 <Image className="logo2 center-img" src="logo.jpg" roundedCircle />
-<p class="p-text">Kaufen und verkaufen Sie Elektronikartikel, Autos, Kleidung, Mode, Sammlerstücke, Sportartikel, Digitalkameras, Babyartikel, Gutscheine und vieles mehr bei eBay, dem weltweiten Online-Marktplatz.</p>
+<p class="p-text">Kaufen und verkaufen Sie Elektronikartikel, Autos, Kleidung, Mode, Sammlerstücke, Sportartikel, Digitalkameras, Babyartikel, Gutscheine und vieles mehr bei yabe, dem weltweiten Online-Marktplatz.</p>
 <div class="center"><Button variant="secondary" href="/register">Registrieren</Button></div>
 </Container>
 
