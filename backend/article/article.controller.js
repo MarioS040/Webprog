@@ -29,8 +29,9 @@ router.post('/upload', authorize(),  upload.single('fileimg'), articleupload)  /
 router.post('/yabeupload', authorize(),  upload.single('fileimg'), yabeeupload) 
 router.get('/auction', authorize(),getactive);          //bekommen aller Artikel, die bei der aktuellen Zeit zwischen timeforauctionA und timeforauctionE legen
 router.post('/bieten/:id', authorize(),artbieten);       //bieten auf einen Artikel
-router.get('/getyabeart', authorize(), getyabeart);     //bekommen der ARtikel die in der Datenbank mit yabeart = true
-router.get('/myuploads', authorize(),getuploads);      // bekommen deer selbst hochgeladenen Artikel
+router.get('/getyabeart', getyabeart);     //bekommen der ARtikel die in der Datenbank mit yabeart = true
+router.get('/myuploads', authorize(), getuploads);
+router.get('/mybuys', authorize(), getbuys);       // bekommen deer selbst hochgeladenen Artikel
 router.get('/search', authorize(), searcharticle);    //suchen anhand des Querys nach dem ?
 router.delete('/:id', authorize(), deletearticle);   //löschen eines Artikels
 router.put('/:id', authorize(), updatearticle);  //Artikel update
@@ -73,6 +74,12 @@ articleService.getmyuploads(req.user.username)
 .then(Article => res.json(Article))
 .catch(next);
 }
+
+function getbuys(req, res, next){
+  articleService.getmybuys(req.user.username)
+  .then(Article => res.json(Article))
+  .catch(next);
+  }
 
 function getyabeart(req, res, next){
 articleService.getallyabeart()

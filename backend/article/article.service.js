@@ -19,7 +19,8 @@ module.exports = {
     deletearticlebyid,
     updateearticlebyid,
     search,
-    uploadyabeart
+    uploadyabeart,
+    getmybuys
     
 };
 
@@ -181,6 +182,19 @@ async function getmyuploads(params){
     const connection = await mysql.createConnection({ host, port, user, password, database });
 
     const sqlquery = 'SELECT * FROM articles WHERE username = ' + '"'+ params +'"' +';';
+
+    const allActive = await connection.query(sqlquery)
+
+    return allActive[0];
+
+}
+
+async function getmybuys(params){
+
+    const { host, port, user, password, database } = config.database;
+    const connection = await mysql.createConnection({ host, port, user, password, database });
+
+    const sqlquery = 'SELECT * FROM articles WHERE userhighestbid = ' + '"'+ params +'"' +';';
 
     const allActive = await connection.query(sqlquery)
 
