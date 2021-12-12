@@ -1,14 +1,15 @@
 import React, { Component} from 'react';
-import './css/artikelübersicht.css';
+import './css/suche.css';
 import Navigation from './navbar';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import userauth from './auth.js';
+import Form from 'react-bootstrap/Form';
+import ArticleO from './artikelübersicht'
 
-
-// Was macht das hier? 
-class artikelübersicht extends Component{
+// Was macht das hier? Erstellt das Array aus Articles aus dem Backend
+class searchBar extends Component{
     constructor(props){
     super(props);
   
@@ -16,7 +17,10 @@ class artikelübersicht extends Component{
         Articles: []
       };
 
-      }
+   
+    }
+
+
     
 
          
@@ -28,7 +32,7 @@ class artikelübersicht extends Component{
         let userdaten = await userauth();
         let token = await userdaten.complusertoken;
 
-            fetch('http://localhost:3000/article/auction',{
+            fetch('http://localhost:3000/article/auction', { // Hier oben muss der Search rein, also das nach dem gesucht wird 
             method: 'GET',
             headers: {"content-type": "application/json",
                      "Authorization": token},
@@ -39,12 +43,14 @@ class artikelübersicht extends Component{
             .then((response) => response.json())
             .then((response) => {this.setState({Articles: response})})
             
+            
            
             }
+        
 
 render(){
 
-
+/*
 // Funktion um Artikel zu "Bauen", keys dienen der Position im Array (Nur ist die Frage, ob die Position jetzt noch so stimmt?)
 // sodass bei der Übergabe klar ist, an welcher Stelle die einzelnen Werte sind
   const  ArticleO = (props) => {
@@ -75,14 +81,54 @@ render(){
                     
     
             </div>
-    )}
+    )} */
 
-    return(
+const Search = () => {
+        return( 
+            
+            <div> 
+               
+               <Form>
+                <Form.Group className="mb-3" controlId="BasiscSearchQuery">
+                    <Form.Label>Suche</Form.Label>
+                    <Form.Control type="text" placeholder="z.B. Kartoffel" />
+                        <Form.Text className="text-muted">
+                            Bitte geben sie die gewünschten Schlagwörter ein
+                        </Form.Text>
+                </Form.Group>
+
+                <Button variant="primary" type="submit">
+                    Suche
+                </Button>
+                </Form>
+            
+            </div>
+        )}
+ 
+   return(
+       <div>
+
+           <Navigation/>
+
+           <Search/>
+
+       </div>
+   )
+}}
+
+export default searchBar
+
+    /* return(
+        
         
         <div>
     
             <Navigation/>
-        
+
+            <Search/>
+            
+
+
             <Row style={{width: "100%"}} xs={1} md={2} lg={4} className="g-4">
             
             {this.state.Articles.map((props)=>{
@@ -99,5 +145,6 @@ render(){
     
 
     )}}
+            */
 
-    export default artikelübersicht
+    
