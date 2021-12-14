@@ -8,7 +8,7 @@ import userauth from './auth.js';
 import Form from 'react-bootstrap/Form';
 import ArticleO from './artikelübersicht'
 
-// Was macht das hier? Erstellt das Array aus Articles aus dem Backend
+// Erstellt das Array aus Articles aus dem Backend
 class searchBar extends Component{
     constructor(props){
     super(props);
@@ -26,7 +26,7 @@ class searchBar extends Component{
          
 
 
-// Fetchen der Daten? 
+// Fetchen der Daten 
   async componentWillMount(){
   
         let userdaten = await userauth();
@@ -81,7 +81,8 @@ render(){
                     
     
             </div>
-    )} */
+    )} 
+*/
 
 const Search = () => {
         return( 
@@ -89,7 +90,7 @@ const Search = () => {
             <div> 
                
                <Form>
-                <Form.Group className="mb-3" controlId="BasiscSearchQuery">
+                <Form.Group className="mb-3">
                     <Form.Label>Suche</Form.Label>
                     <Form.Control type="text" placeholder="z.B. Kartoffel" />
                         <Form.Text className="text-muted">
@@ -116,9 +117,9 @@ const Search = () => {
    )
 }}
 
-export default searchBar
+/*
 
-    /* return(
+     return(
         
         
         <div>
@@ -145,6 +146,6 @@ export default searchBar
     
 
     )}}
-            */
-
+   */         
+    export default searchBar
     
