@@ -16,8 +16,6 @@ class searchBar extends Component{
     this.state = {
         Articles: []
       };
-
-   
     }
 
 
@@ -32,7 +30,7 @@ class searchBar extends Component{
         let userdaten = await userauth();
         let token = await userdaten.complusertoken;
 
-            fetch('http://localhost:3000/article/auction', { // Hier oben muss der Search rein, also das nach dem gesucht wird 
+            fetch('http://localhost:3000/article/search?search=', { // Hier oben muss der Search rein, also das nach dem gesucht wird 
             method: 'GET',
             headers: {"content-type": "application/json",
                      "Authorization": token},
@@ -50,7 +48,7 @@ class searchBar extends Component{
 
 render(){
 
-/*
+
 // Funktion um Artikel zu "Bauen", keys dienen der Position im Array (Nur ist die Frage, ob die Position jetzt noch so stimmt?)
 // sodass bei der Übergabe klar ist, an welcher Stelle die einzelnen Werte sind
   const  ArticleO = (props) => {
@@ -82,7 +80,7 @@ render(){
     
             </div>
     )} 
-*/
+
 
 const Search = () => {
         return( 
@@ -92,7 +90,7 @@ const Search = () => {
                <Form>
                 <Form.Group className="mb-3">
                     <Form.Label>Suche</Form.Label>
-                    <Form.Control type="text" placeholder="z.B. Kartoffel" />
+                    <Form.Control type="text" placeholder="z.B. Kartoffel"/>
                         <Form.Text className="text-muted">
                             Bitte geben sie die gewünschten Schlagwörter ein
                         </Form.Text>
@@ -105,7 +103,7 @@ const Search = () => {
             
             </div>
         )}
- 
+ /*
    return(
        <div>
 
@@ -116,8 +114,8 @@ const Search = () => {
        </div>
    )
 }}
+*/
 
-/*
 
      return(
         
@@ -146,6 +144,6 @@ const Search = () => {
     
 
     )}}
-   */         
+           
     export default searchBar
     
