@@ -1,12 +1,15 @@
-import React, { Component} from 'react';
+import React, { Component, useState, useEffect, useCallback} from 'react';
 import './css/suche.css';
 import Navigation from './navbar';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import userauth from './auth.js';
-import Form from 'react-bootstrap/Form';
-import ArticleO from './artikelübersicht'
+
+
+
+
+
 
 // Erstellt das Array aus Articles aus dem Backend
 class searchBar extends Component{
@@ -14,14 +17,13 @@ class searchBar extends Component{
     super(props);
   
     this.state = {
-        Articles: []
-      };
+        articleSearch:"",
+        Articles: [],
+      };     
     }
+ 
+   
 
-
-    
-
-         
 
 
 // Fetchen der Daten 
@@ -30,7 +32,7 @@ class searchBar extends Component{
         let userdaten = await userauth();
         let token = await userdaten.complusertoken;
 
-            fetch('http://localhost:3000/article/search?search=', { // Hier oben muss der Search rein, also das nach dem gesucht wird 
+            fetch(`http://localhost:3000/article/search?search=${this.state.articleSearch}`, { // Hier oben muss der Search rein, also das nach dem gesucht wird 
             method: 'GET',
             headers: {"content-type": "application/json",
                      "Authorization": token},
@@ -45,6 +47,19 @@ class searchBar extends Component{
            
             }
         
+    
+            handleChange = event => {
+                this.setState({articleSearch: event.target.value});
+                this.componentWillMount();
+            };  
+
+          
+            
+            
+
+
+
+
 
 render(){
 
@@ -82,52 +97,29 @@ render(){
     )} 
 
 
-const Search = () => {
-        return( 
-            
-            <div> 
-               
-               <Form>
-                <Form.Group className="mb-3">
-                    <Form.Label>Suche</Form.Label>
-                    <Form.Control type="text" placeholder="z.B. Kartoffel"/>
-                        <Form.Text className="text-muted">
-                            Bitte geben sie die gewünschten Schlagwörter ein
-                        </Form.Text>
-                </Form.Group>
-
-                <Button variant="primary" type="submit">
-                    Suche
-                </Button>
-                </Form>
-            
-            </div>
-        )}
- /*
-   return(
-       <div>
-
-           <Navigation/>
-
-           <Search/>
-
-       </div>
-   )
-}}
-*/
 
 
-     return(
-        
-        
+
+
+return( 
         <div>
-    
             <Navigation/>
 
-            <Search/>
+            <div> 
+            <center> 
+
+            <input key="input1" type='search'
+            style={{display: "flex"}} 
+            placeholder='Schlagwort eingeben...'
+            value={this.state.articleSearch}
+            onChange={this.handleChange}
+            >
             
-
-
+            </input>
+            
+            </center> 
+            </div>
+            
             <Row style={{width: "100%"}} xs={1} md={2} lg={4} className="g-4">
             
             {this.state.Articles.map((props)=>{
@@ -136,14 +128,11 @@ const Search = () => {
                 
             })}
             
-            </Row>
-                 
-            
+            </Row>   
         </div>
-        
+    )}}
     
 
-    )}}
-           
+    
     export default searchBar
     
