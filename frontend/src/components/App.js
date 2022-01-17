@@ -8,6 +8,7 @@ import upload from './upload';
 import yabeupload from './yabeupload';
 import artikel from './artikel'; 
 import artikelübersicht from './artikelübersicht';
+import suche from './suche';
 import yabearticle from './yabearticle';
 import mybuys from './mybuys';
 import myuploads from './myuploads';
@@ -41,6 +42,7 @@ function App() {
 <Route path="/Artikel" component={yabearticle} />
 <Route exact path="/" component={home} />
 <Route path="/artikel" component={artikel} />
+<Route path="/suche" component={suche}/>
 <PrivateRoute path="/artikelübersicht" component={artikelübersicht} />
 </Switch>
 </Router>

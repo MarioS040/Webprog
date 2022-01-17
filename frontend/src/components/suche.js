@@ -1,5 +1,5 @@
-import React, { Component} from 'react';
-import './css/artikelübersicht.css';
+import React, { Component, useState, useEffect, useCallback} from 'react';
+import './css/suche.css';
 import Navigation from './navbar';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -7,28 +7,32 @@ import Row from 'react-bootstrap/Row';
 import userauth from './auth.js';
 
 
-// Was macht das hier? 
-class artikelübersicht extends Component{
+
+
+
+
+// Erstellt das Array aus Articles aus dem Backend
+class searchBar extends Component{
     constructor(props){
     super(props);
   
     this.state = {
-        Articles: []
-      };
+        articleSearch:"",
+        Articles: [],
+      };     
+    }
+ 
+   
 
-      }
-    
-
-         
 
 
-// Fetchen der Daten? 
+// Fetchen der Daten 
   async componentWillMount(){
   
         let userdaten = await userauth();
         let token = await userdaten.complusertoken;
 
-            fetch('http://localhost:3000/article/auction',{
+            fetch(`http://localhost:3000/article/search?search=${this.state.articleSearch}`, { // Hier oben muss der Search rein, also das nach dem gesucht wird 
             method: 'GET',
             headers: {"content-type": "application/json",
                      "Authorization": token},
@@ -39,8 +43,23 @@ class artikelübersicht extends Component{
             .then((response) => response.json())
             .then((response) => {this.setState({Articles: response})})
             
+            
            
             }
+        
+    
+            handleChange = event => {
+                this.setState({articleSearch: event.target.value});
+                this.componentWillMount();
+            };  
+
+          
+            
+            
+
+
+
+
 
 render(){
 
@@ -75,14 +94,32 @@ render(){
                     
     
             </div>
-    )}
+    )} 
 
-    return(
-        
+
+
+
+
+
+return( 
         <div>
-    
             <Navigation/>
-        
+
+            <div> 
+            <center> 
+
+            <input key="input1" type='search'
+            style={{display: "flex"}} 
+            placeholder='Schlagwort eingeben...'
+            value={this.state.articleSearch}
+            onChange={this.handleChange}
+            >
+            
+            </input>
+            
+            </center> 
+            </div>
+            
             <Row style={{width: "100%"}} xs={1} md={2} lg={4} className="g-4">
             
             {this.state.Articles.map((props)=>{
@@ -91,13 +128,11 @@ render(){
                 
             })}
             
-            </Row>
-                 
-            
+            </Row>   
         </div>
-        
+    )}}
     
 
-    )}}
-
-    export default artikelübersicht
+    
+    export default searchBar
+    
