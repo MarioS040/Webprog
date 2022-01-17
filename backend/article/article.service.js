@@ -19,7 +19,8 @@ module.exports = {
     deletearticlebyid,
     updateearticlebyid,
     search,
-    uploadyabeart
+    uploadyabeart,
+    getmybuys
     
 };
 
@@ -188,17 +189,30 @@ async function getmyuploads(params){
 
 }
 
+async function getmybuys(params){
+
+    const { host, port, user, password, database } = config.database;
+    const connection = await mysql.createConnection({ host, port, user, password, database });
+
+    const sqlquery = 'SELECT * FROM articles WHERE userhighestbid = ' + '"'+ params +'"' +';';
+
+    const allActive = await connection.query(sqlquery)
+
+    return allActive[0];
+
+}
+
 
 async function uploadyabeart(req){
 
-    if(req.user.yabeempl === "false"){
-       console.log(req.yabeempl)
+
+       
     if(req.yabeempl === "false"){
     throw "nicht gestattet";
        
       }
     else if(req.user.yabeempl === "true"){
-     
+     console.log("hier")
        //Berechnung und Ausgabe der Uhrzeit für Anfang Auction und ende Auction
         let date = new Date();
         let stunden = date.getHours();
@@ -220,7 +234,7 @@ async function uploadyabeart(req){
         let complarticle = Object.assign(req.body, theusername, beginnauction, endauction, yabeart)
         await db.Article.create(complarticle);
 
-}}}
+}}
 
 
 

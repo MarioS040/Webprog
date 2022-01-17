@@ -75,7 +75,7 @@ return(
 <Container classname="text">
 
 <Image className="logo2 center-img" src="logo.jpg" roundedCircle />
-<p class="p-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+<p class="p-text">Kaufen und verkaufen Sie Elektronikartikel, Autos, Kleidung, Mode, Sammlerstücke, Sportartikel, Digitalkameras, Babyartikel, Gutscheine und vieles mehr bei yabe, dem weltweiten Online-Marktplatz.</p>
 <div class="center"><Button variant="secondary" href="/register">Registrieren</Button></div>
 </Container>
 
