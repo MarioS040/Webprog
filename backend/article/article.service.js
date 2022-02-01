@@ -3,6 +3,7 @@ const db = require('_helpers/db');
 const config = require('config.json');
 const mysql = require('mysql2/promise');
 const { param } = require('./article.controller');
+const { YEAR } = require('mysql2/lib/constants/types');
 
 
 
@@ -212,17 +213,21 @@ async function uploadyabeart(req){
        
       }
     else if(req.user.yabeempl === "true"){
-     console.log("hier")
        //Berechnung und Ausgabe der Uhrzeit für Anfang Auction und ende Auction
         let date = new Date();
-        let stunden = date.getHours();
-        let minuten = date.getMinutes();
-        let minutenende = minuten + 15;
-        let uhrzeit = stunden + ":" + minuten;
-        let uhrzeitende = stunden + ":" + minutenende;
-        let beginnauction = {"timeforauctionA": uhrzeit}
-        let endauction =  {"timeforauctionE" : uhrzeitende}
+        date.setTime(date.getTime());
    
+
+        var newDateObj = new Date();
+        newDateObj.setTime(date.getTime() + (15 * 60 * 1000)); // Zur sicherstellung, dass nicht nur die Minuten um 15 Minuten erhöht werden sonst würden Uhrzeite wie 16:75 zb zustande kommen
+      
+        let ende = newDateObj.toString() 
+      let anfang = date.toString(date)
+     
+        let beginnauction = {"timeforauctionA": anfang}
+        let endauction =  {"timeforauctionE" : ende}
+ 
+        
        
        //username für den Artikel wird im Backend gespeichert
         let theusername = {"username" : req.user.username}
