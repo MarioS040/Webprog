@@ -61,8 +61,8 @@ async function search(searchparam){
 
     const { host, port, user, password, database } = config.database;
     const connection = await mysql.createConnection({ host, port, user, password, database });
-     const searchquery = "SELECT * FROM articles WHERE articleName LIKE " +"'"+ "%" + searchparam +"%"+"'"+ "AND CURRENT_TIME BETWEEN timeforauctionA AND timeforauctionE;";
-     
+     const searchquery = "SELECT * FROM articles WHERE articleName LIKE " +"'"+ "%" + searchparam +"%"+"'"+ "AND CURRENT_TIMESTAMP BETWEEN timeforauctionA AND timeforauctionE;";
+     console.log(searchquery)
      const searchedarticles = await connection.query(searchquery)
 
      return searchedarticles[0];
@@ -223,8 +223,8 @@ async function uploadyabeart(req){
       
         let endeuhrzeit = newDateObj.toLocaleTimeString();
         let anfang = date.toLocaleTimeString();
-        let endedatum = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay() + "T" + endeuhrzeit;
-        let anfangdatum = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay() + "T" + anfang;
+        let endedatum = date.getFullYear() + "-" + date.getDay() + "-" + date.getMonth() + "T" + endeuhrzeit;
+        let anfangdatum = date.getFullYear() + "-" + date.getDay() + "-" + date.getMonth() + "T" + anfang;
         
 
 
