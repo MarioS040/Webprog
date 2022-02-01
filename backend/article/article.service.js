@@ -221,11 +221,15 @@ async function uploadyabeart(req){
         var newDateObj = new Date();
         newDateObj.setTime(date.getTime() + (15 * 60 * 1000)); // Zur sicherstellung, dass nicht nur die Minuten um 15 Minuten erhöht werden sonst würden Uhrzeite wie 16:75 zb zustande kommen
       
-        let ende = newDateObj.toString() 
-      let anfang = date.toString(date)
-     
-        let beginnauction = {"timeforauctionA": anfang}
-        let endauction =  {"timeforauctionE" : ende}
+        let endeuhrzeit = newDateObj.toLocaleTimeString();
+        let anfang = date.toLocaleTimeString();
+        let endedatum = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay() + "T" + endeuhrzeit;
+        let anfangdatum = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay() + "T" + anfang;
+        
+
+
+        let beginnauction = {"timeforauctionA": anfangdatum}
+        let endauction =  {"timeforauctionE" : endedatum}
  
         
        
