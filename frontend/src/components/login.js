@@ -121,12 +121,12 @@ return(
     <h3>Login</h3>
     <hr />
     <form onSubmit={this.submitHandler}>
-      <div class="form-group">
+      <div class="form-groupn container">
         <label for="Benutzername">Benutzername</label>
         <input type="text" name="username" class="form-control" id="username" placeholder="Benutzername" value={username} onChange={this.changeHandler}></input>
       </div>
     
-      <div class="form-group">
+      <div class="form-group container">
         <label for="Passwort">Passwort</label>
         <input type="password" name="password" class="form-control" id="password" placeholder="Password" value={password} onChange={this.changeHandler}></input>
       
