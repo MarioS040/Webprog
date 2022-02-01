@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import './css/artikel.css';
 import Navigation from './navbar';
-
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 export default function(){
     return(
@@ -9,38 +14,33 @@ export default function(){
     <div>
         <Navigation/>
         
-        <div class = "produkt">
-
-        <header>
-            <hgroup>
-                <h1> Produkt X </h1>
-                <h4> Das beste X überhaupt </h4>
-            </hgroup>
-        </header>
         
-        <figure>
-            <img></img>
-        </figure>
-
-        <section>
-
-            <p> 
-            Lorem Ipsum bla bla. Lorem ipsum dolor sit amet, consetetur sadipscing elitr. Lorem ipsum dolor sit amet, consetetur sadipscing elitr
-            </p>
-
-            <details> 
-                <summary> Produkt Beschreibung </summary>
-                <ul>
-                    <li> Lorem ipsum dolor sit amet, consetetur sadipscing elitr </li>
-                    <li> Lorem ipsum dolor sit amet, consetetur sadipscing elitr </li>
-                    <li> Lorem ipsum dolor sit amet, consetetur sadipscing elitr </li>
-                </ul>
-            </details>
-
-            <button> Bieten </button>
-        </section>
-        </div>
-
+        <Container fluid="md">
+        <Row>
+            <Col lg={true}>
+               <Image roundedCircle
+                src='https://th.bing.com/th/id/R.174d1d09fe1b5f15f427ea8411fe2a21?rik=GJ9zKw7M6IGbuA&pid=ImgRaw&r=0'>
+                   
+                   
+                </Image> 
+            
+            
+            </Col>
+            <Col lg={true}>  </Col>
+        </Row>
+        <Row>
+            <Col lg={true}>
+            <h1> Artikelbeschreibung </h1>
+            <h5> Hier stehen die Informationen </h5>
+            </Col>
+        </Row>
+        <Row>
+        <Col> <Button variant="primary">Bieten</Button> </Col>
+        <Col> <Form.Control style={({marginTop: '20px'})} placeholder='z.B. 20€'></Form.Control> </Col>
+        </Row>
+        
+        </Container>
+        
 
     </div>
 
