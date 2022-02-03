@@ -14,7 +14,7 @@ class artikel extends Component{
         super(props);
       
         this.state = {
-            Article: {}
+            Article: []
           };
     
           }
@@ -33,10 +33,8 @@ class artikel extends Component{
                 
                 )
                 .then((response) => response.json())
-                .then((response) => {this.setState({Article: response})})
-                
-               
-                }    
+                .then((response) => {this.setState({Articles: response})})
+            }   
 
 
 
@@ -58,14 +56,14 @@ render(){
             
             </Col>
             <Col lg={true}> 
-            <h3 style={({marginTop: '200px'})}> Preis: {props.Price} </h3>
-            <h5> Autkion endet am: {props.timeforauctionE} </h5>
+            <h3 key= {4} style={({marginTop: '200px'})}> Preis: {props.Price} </h3>
+            <h5 key = {7}> Autkion endet am: {props.timeforauctionE} </h5>
             </Col>
         </Row>
         <Row>
             <Col lg={true}>
-            <h1 style={({marginTop: '30px'})}> {props.articleName} </h1>
-            <h5> Beschreibung: {props.articleDescription} </h5>
+            <h1 key = {2} style={({marginTop: '30px'})}> {props.articleName} </h1>
+            <h5 key = {3}> Beschreibung: {props.articleDescription} </h5>
             </Col>
         
         </Row>
@@ -81,11 +79,13 @@ render(){
 return(
 
     <div>   
+    
     <Navigation/>
 
-    {this.state.Article.map((props)=>{
-        return <ArticleDetail articleName={props.articleName} articleDescription={props.articleDescription} Price={props.Price} timeforauctionE={props.timeforauctionE}/>
-    })}
+    
+    
+    <ArticleDetail articleName="Handschuh" articleDescription="Halt dein Maul Stefan" Price="5 CHF" timeforauctionE="Wenn du mal zahlst du Hund"/>
+    
     
     </div>   
 
