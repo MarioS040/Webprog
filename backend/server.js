@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const errorHandler = require('_middleware/error-handler');
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json()); //body in Json Wandeln
 app.use(cors());
 
 // api für Users wird aufgerufen, im  users.controller werden die entsprechenden sub routen aufgerufen und verarbeitet
