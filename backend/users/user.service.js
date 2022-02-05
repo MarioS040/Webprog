@@ -37,7 +37,7 @@ async function create(params) {
         params.hash = await bcrypt.hash(params.password, 10);
     }
 
-    // User in der Datenbank einstellen
+    // User in DB anlegen
     await db.User.create(params);
 }
 
