@@ -26,7 +26,6 @@ const Artikel = () => {
             })
                 .then((response) => response.json())
                 .then((artikel) => setArtikel(artikel))
-                console.log(artikel)
         };
         getArtikel();
     }, [id]);
