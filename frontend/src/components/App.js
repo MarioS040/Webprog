@@ -39,7 +39,7 @@ function App() {
 <PrivateRoute path="/myuploads" component={myuploads} />
 <PrivateRoute path="/mybuys" component={mybuys} />
 <Route path="/home" component={home} />
-<Route path="/Artikel" component={yabearticle} />
+<Route path="/Artikel/:id" component={artikel} /> {/**Component Yabeartikel in Artikel geändert */}
 <Route exact path="/" component={home} />
 <Route path="/artikel" component={artikel} />
 <Route path="/suche" component={suche}/>
