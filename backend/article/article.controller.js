@@ -118,6 +118,7 @@ function createarticleyabe(req, res, next) {
 }
 
 function getArtById(req, res, next) {
+  console.log(req)
   articleService.getArtById(req.params.id)
       .then(Article => res.json(Article))
       .catch(next);

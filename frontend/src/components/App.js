@@ -41,7 +41,7 @@ function App() {
 <Route path="/home" component={home} />
 <Route path="/Artikel" component={yabearticle} />
 <Route exact path="/" component={home} />
-<Route path="/artikel" component={artikel} />
+<Route path="/artikel/:id" component={artikel} />
 <Route path="/suche" component={suche}/>
 <PrivateRoute path="/artikelübersicht" component={artikelübersicht} />
 </Switch>

@@ -39,7 +39,7 @@ class artikelübersicht extends Component{
             .then((response) => response.json())
             .then((response) => {this.setState({Articles: response})})
             
-           
+          
             }
 
 render(){
@@ -64,7 +64,10 @@ render(){
                                     <Card.Text key={3}>{props.articleDescription}</Card.Text>
                                     <Card.Subtitle key={4}>aktueller Preis: {props.Price} €</Card.Subtitle>
                                     <Card.Subtitle key={5}>Auktion endet am: {props.timeforauctionE}</Card.Subtitle>
-                                    <Button variant="primary">Zum Produkt</Button>
+                                    <Button style={{marginTop: '5px'}} onClick={(e) => {
+                                            e.preventDefault();
+                                            window.location.href='http://localhost:3000/Artikel/' + this.state.Articles[0].id;
+                                        }} variant="secondary">Zum Produkt</Button>
                     
                                 
     

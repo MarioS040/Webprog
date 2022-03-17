@@ -19,6 +19,7 @@ Ablauf von User.controller und article.controller ist identisch aufgebaut,
 
 router.post('/authenticate', authenticateSchema, authenticate);
 router.post('/register', registerSchema, register);
+router.get('/current', authorize(), getCurrent);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize(), updateSchema, update);
 
@@ -36,6 +37,10 @@ function authenticate(req, res, next) {
     userService.authenticate(req.body)
         .then(user => res.json(user))
         .catch(next);
+}
+
+function getCurrent(req, res, next) {
+    res.json(req.user);
 }
 
 function registerSchema(req, res, next) {

@@ -62,7 +62,7 @@ return(
 return(
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
   <Container>
-  <Navbar.Brand href="/"><Image src="image1.jpg" roundedCircle /></Navbar.Brand>
+  <Navbar.Brand href="/"><Image src="../image1.jpg" roundedCircle /></Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="me-auto">
