@@ -63,7 +63,10 @@ let imgpath = "http://localhost:3000/uploads/" + props.path
                                     <Card.Text key={3}>{props.articleDescription}</Card.Text>
                                     <Card.Subtitle key={4}>aktueller Preis: {props.Price} €</Card.Subtitle>
                                     <Card.Subtitle key={5}>Auktion endet am: {props.timeforauctionE}</Card.Subtitle>
-                                    <Button variant="primary">Zum Produkt</Button>
+                                    <Button style={{marginTop: '5px'}} onClick={(e) => {
+                                            e.preventDefault();
+                                            window.location.href='http://localhost:3000/Artikel/' + props.id;
+                                        }} variant="secondary">Zum Produkt</Button>
                     
                                 
     
@@ -86,7 +89,7 @@ let imgpath = "http://localhost:3000/uploads/" + props.path
             
             {this.state.Articles.map((props)=>{
 
-                return <ArticleO articleName={props.articleName} articleDescription={props.articleDescription} Price={props.Price} timeforauctionE={props.timeforauctionE} path={props.path} />;
+                return <ArticleO articleName={props.articleName} articleDescription={props.articleDescription} Price={props.Price} timeforauctionE={props.timeforauctionE} path={props.path} id={props.id}/>;
                 
             })}
 

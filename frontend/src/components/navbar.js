@@ -37,9 +37,9 @@ function logoutregistred (){
   if (localStorage.getItem('isAuthenticated')){
 return(
   <Nav>
-     <Nav.Link href="/mybuys">meine Käufe</Nav.Link>
-     <Nav.Link href="/myuploads">meine Uploads</Nav.Link>
-     <Button type="button" class="btn-sm"> <Nav.Link href="/logout">Logout</Nav.Link> </Button>
+     <Nav.Link style={{marginTop: "11px"}} href="/mybuys">meine Käufe</Nav.Link>
+     <Nav.Link style={{marginTop: "11px"}} href="/myuploads">meine Uploads</Nav.Link>
+     <Button type="button" class="btn-sm" style={{marginLeft: "10px", padding: "5px", marginTop:"7px"}}> <Nav.Link href="/logout">Logout</Nav.Link> </Button>
   </Nav>
 )
   } 

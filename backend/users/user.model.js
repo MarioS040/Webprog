@@ -25,3 +25,8 @@ function model(sequelize) {
 
     return sequelize.define('User', attributes, options);
 }
+
+
+/*
+Hier wird der User als Modell beschrieben, so wird dieser auch in der Datenbank angelegt
+*/

@@ -19,3 +19,7 @@ function model(sequelize) {
 
     return sequelize.define('Article', attributes);
 }
+
+/*
+Hier wird der Artikel als Modell beschrieben, so wird dieser auch in der Datenbank angelegt
+*/

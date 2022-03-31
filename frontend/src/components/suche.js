@@ -5,13 +5,15 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import userauth from './auth.js';
+import Form from 'react-bootstrap/Form';
 
 
 
 
 
 
-// Erstellt das Array aus Articles aus dem Backend
+// Ähnlicher Aufbau wie bei der Artikelübersicht nur wird diesmal der State
+// für den Such Query ebenfalls deklariert
 class searchBar extends Component{
     constructor(props){
     super(props);
@@ -26,7 +28,8 @@ class searchBar extends Component{
 
 
 
-// Fetchen der Daten 
+// Gleiche Funktion wie bei der Artikelübersicht, jedoch wird diesmal auf den ArtikelSuch
+// Fetch angewendet
   async componentWillMount(){
   
         let userdaten = await userauth();
@@ -47,7 +50,9 @@ class searchBar extends Component{
            
             }
         
-    
+            // die handleChange Funktion wird dann aufgerufen, wenn der value in der Suchleiste geändert wird
+            // Anschließend wird der neue State gestetzt, dieser enthält dann den event.target.value 
+            // Letztendlich wird gerefetched und die Daten werden neu geladen
             handleChange = event => {
                 this.setState({articleSearch: event.target.value});
                 this.componentWillMount();
@@ -64,8 +69,7 @@ class searchBar extends Component{
 render(){
 
 
-// Funktion um Artikel zu "Bauen", keys dienen der Position im Array (Nur ist die Frage, ob die Position jetzt noch so stimmt?)
-// sodass bei der Übergabe klar ist, an welcher Stelle die einzelnen Werte sind
+// Gleiche Artikelübersicht Funktion wie in der Artikelübersicht, Daten werden als Kacheln angelegt
   const  ArticleO = (props) => {
 
     let imgpath = "http://localhost:3000/uploads/" + props.path
@@ -83,7 +87,10 @@ render(){
                                     <Card.Text key={3}>{props.articleDescription}</Card.Text>
                                     <Card.Subtitle key={4}>aktueller Preis: {props.Price} €</Card.Subtitle>
                                     <Card.Subtitle key={5}>Auktion endet am: {props.timeforauctionE}</Card.Subtitle>
-                                    <Button variant="primary">Zum Produkt</Button>
+                                    <Button style={{marginTop: '5px'}} onClick={(e) => {
+                                            e.preventDefault();
+                                            window.location.href='http://localhost:3000/Artikel/' + this.state.Articles[0].id;
+                                        }} variant="secondary">Zum Produkt</Button>
                     
                                 
     
@@ -100,7 +107,12 @@ render(){
 
 
 
-
+// input ist das Input Feld (=Suchleiste) in der die Suchbefehle eingegeben werden können
+// Wenn etwas in das Feld eingegeben wird, wird der handleChange aufgerufen und der neue State
+// gesetzt. Der Value der Suchleiste ist der state der article Search und ist beim Laden der 
+// Unterseite erstmal leer -> siehe oben in der Klasse vordefiniert
+// placeholder ist Platzhalter und style ist wieder CSS Komponente
+// Da Bootstrap teilweise genutzt, kein großer Bedarf an CSS Files
 return( 
         <div>
             <Navigation/>
@@ -108,14 +120,17 @@ return(
             <div> 
             <center> 
 
-            <input key="input1" type='search'
+            <div className='Suchleiste'>
+            <Form>
+            <Form.Control key="input1" type='search'
             style={{display: "flex"}} 
             placeholder='Schlagwort eingeben...'
             value={this.state.articleSearch}
-            onChange={this.handleChange}
-            >
+            onChange={this.handleChange}/>
             
-            </input>
+            
+            </Form>
+            </div>
             
             </center> 
             </div>
@@ -131,7 +146,7 @@ return(
             </Row>   
         </div>
     )}}
-    
+    // Ausgabe der Row wieder sodass mobile optimiert 
 
     
     export default searchBar

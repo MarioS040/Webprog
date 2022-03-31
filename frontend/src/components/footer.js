@@ -55,7 +55,7 @@ return(
   <td class="footer-header">Informationen</td>
   </tr>
   <tr>
-  <td class="Tabelle"><a class="informationen" href="impressum.html">Impressum</a></td>
+  <td class="Tabelle"><a class="informationen" href="/Impressum">Impressum</a></td>
   </tr>
   <tr>
   <td  class="Tabelle"><a class="informationen" href="https://www.google.com/maps/dir//Heidenheim+an+der+Brenz/@48.7135491,10.1207437,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x47991673f3cf9a8b:0xcc72abe0ccd2b706!2m2!1d10.1610948!2d48.6893963">Anfahrt</a></td>
