@@ -5,11 +5,9 @@ const db = require('_helpers/db');
 
 module.exports = {
     authenticate,
-    getAll,
     getById,
     create,
     update,
-    delete: _delete
 };
 
 async function authenticate({ username, password }) {
@@ -23,9 +21,6 @@ async function authenticate({ username, password }) {
     return { ...omitHash(user.get()), token };
 }
 
-async function getAll() {
-    return await db.User.findAll();
-}
 
 async function getById(id) {
     return await getUser(id);
@@ -42,7 +37,7 @@ async function create(params) {
         params.hash = await bcrypt.hash(params.password, 10);
     }
 
-    // User in der Datenbank einstellen
+    // User in DB anlegen
     await db.User.create(params);
 }
 
@@ -67,10 +62,6 @@ async function update(id, params) {
     return omitHash(user.get());
 }
 
-async function _delete(id) {
-    const user = await getUser(id);
-    await user.destroy();
-}
 
 // Zusätzliche Funktionen
 
